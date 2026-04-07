@@ -1,0 +1,105 @@
+﻿@page "/"
+@inject IConfiguration Config
+@inject HttpClient Http
+
+<PageTitle>Nachricht senden</PageTitle>
+
+<h3>Nachricht an Jugend senden</h3>
+
+@if (!IsAuthenticated)
+{
+    <div class="card p-3 mt-3" style="max-width: 400px;">
+        <h5>Login</h5>
+        <input type="password" class="form-control mt-2" placeholder="Passwort"
+               @bind="Password" @bind:event="oninput" />
+
+        <button class="btn btn-primary mt-3" @onclick="CheckPassword">
+            Login
+        </button>
+
+        @if (LoginFailed)
+        {
+            <p class="text-danger mt-2">Falsches Passwort.</p>
+        }
+    </div>
+}
+else
+{
+    <div class="card p-3 mt-3">
+        <h5>Nachricht eingeben</h5>
+
+        <textarea class="form-control" rows="5"
+                  placeholder="Deine Nachricht..."
+                  @bind="Message"></textarea>
+
+        <button class="btn btn-success mt-3" @onclick="SendMessage"
+                disabled="@IsSending">
+            @(IsSending ? "Sende..." : "An alle senden")
+        </button>
+
+        @if (SendSuccess)
+        {
+            <p class="text-success mt-2">Nachricht erfolgreich gesendet.</p>
+        }
+
+        @if (SendError)
+        {
+            <p class="text-danger mt-2">Fehler beim Senden der Nachricht.</p>
+        }
+    </div>
+}
+
+@code {
+    private string Password = "";
+    private string Message = "";
+    private bool IsAuthenticated = false;
+    private bool LoginFailed = false;
+
+    private bool IsSending = false;
+    private bool SendSuccess = false;
+    private bool SendError = false;
+
+    private async Task CheckPassword()
+    {
+        var correctPassword = Config["AdminPassword"];
+
+        if (Password == correctPassword)
+        {
+            IsAuthenticated = true;
+            LoginFailed = false;
+        }
+        else
+        {
+            LoginFailed = true;
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        IsSending = true;
+        SendSuccess = false;
+        SendError = false;
+
+        try
+        {
+            var payload = new { message = Message };
+            var response = await Http.PostAsJsonAsync("https://bot-api.joloewen.de/send", payload);
+
+            if (response.IsSuccessStatusCode)
+            {
+                SendSuccess = true;
+                Message = "";
+            }
+            else
+            {
+                SendError = true;
+            }
+        }
+        catch
+        {
+            SendError = true;
+        }
+
+        IsSending = false;
+    }
+}

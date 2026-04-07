@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BotApi/BotApi.csproj" />
+  <Project Path="SendClient/SendClient.csproj" />
+</Solution>
