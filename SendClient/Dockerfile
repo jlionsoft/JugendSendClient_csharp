@@ -6,20 +6,17 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# csproj liegt direkt im Ordner SendClient/
-COPY ["SendClient/SendClient.csproj", "./"]
-RUN dotnet restore "./SendClient.csproj"
+# csproj kopieren
+COPY ["SendClient.csproj", "./"]
+RUN dotnet restore
 
-# Rest kopieren
-COPY SendClient/. .
+# Rest des Projekts kopieren
+COPY . .
 
-RUN dotnet build "./SendClient.csproj" -c $BUILD_CONFIGURATION -o /app/build
-
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./SendClient.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+# Build
+RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "SendClient.dll"]
