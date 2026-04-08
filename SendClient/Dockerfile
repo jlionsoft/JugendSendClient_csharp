@@ -6,14 +6,14 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# csproj kopieren
+# csproj kopieren (liegt im selben Ordner wie Dockerfile)
 COPY ["SendClient.csproj", "./"]
 RUN dotnet restore
 
 # Rest des Projekts kopieren
 COPY . .
 
-# Build
+# Build + Publish
 RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final

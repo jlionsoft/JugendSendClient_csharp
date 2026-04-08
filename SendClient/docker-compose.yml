@@ -3,7 +3,7 @@ version: "3.9"
 services:
   miniweb:
     build:
-      context: ./SendClient
+      context: .
       dockerfile: Dockerfile
     container_name: miniweb
     environment:
