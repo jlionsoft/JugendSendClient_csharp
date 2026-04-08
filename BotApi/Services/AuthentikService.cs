@@ -23,23 +23,15 @@ public class AuthentikService
         _http.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-        var url = $"{baseUrl}/api/v3/core/groups/{groupId}/users/";
+        var url = $"{baseUrl}/api/v3/core/groups/{groupId}/";
 
-        var response = await _http.GetFromJsonAsync<AuthentikUserResponse>(url);
+        var group = await _http.GetFromJsonAsync<AuthentikUserGroupDto>(url);
 
-        return response?.Results?.Select(u => new AuthentikUser
+        var users = new List<AuthentikUser>();
+        foreach (var user in group.users_obj)
         {
-            Username = u.Username
-        }).ToList() ?? new();
-    }
-
-    private class AuthentikUserResponse
-    {
-        public List<UserResult> Results { get; set; } = new();
-    }
-
-    private class UserResult
-    {
-        public string Username { get; set; } = "";
+            users.Add(new AuthentikUser { Username = user.username });
+        }
+        return users;
     }
 }
