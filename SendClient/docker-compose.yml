@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  miniweb:
+    build:
+      context: ./SendClient
+      dockerfile: Dockerfile
+    container_name: miniweb
+    environment:
+      AdminPassword: ${ADMIN_PASSWORD}
+      ApiBaseUrl: https://bot-api.joloewen.de
+    ports:
+      - "8090:8080"
+    restart: unless-stopped
+    networks:
+      - nextcloud-net
+
+networks:
+  nextcloud-net:
+    external: true
