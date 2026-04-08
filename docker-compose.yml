@@ -1,0 +1,6 @@
+services:
+  botapi:
+    image: ${DOCKER_REGISTRY-}botapi
+    build:
+      context: BotApi
+      dockerfile: Dockerfile

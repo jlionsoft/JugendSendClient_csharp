@@ -1,0 +1,25 @@
+﻿version: "3.9"
+
+services:
+  botapi:
+    image: botapi:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: botapi
+    environment:
+      AdminPassword: ${ADMIN_PASSWORD}
+      Authentik__BaseUrl: https://authentik.joloewen.de
+      Authentik__Token: ${AUTHENTIK_TOKEN}
+      Authentik__YouthGroupId: ${YOUTH_GROUP_ID}
+      Matrix__Homeserver: https://matrix.joloewen.de
+      Matrix__BotToken: ${MATRIX_BOT_TOKEN}
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - nextcloud-net
+
+networks:
+  nextcloud-net:
+    external: true
