@@ -14,6 +14,9 @@ builder.Services.AddHttpClient();
 builder.Services.AddSingleton<AuthentikService>();
 builder.Services.AddSingleton<MatrixService>();
 builder.Services.AddSingleton<MessageService>();
+builder.Services.AddSingleton<UserProvisioningService>();
+builder.Services.AddSingleton<MatrixAdminService>();
+builder.Services.AddSingleton<AuthentikUserService>();
 
 var app = builder.Build();
 

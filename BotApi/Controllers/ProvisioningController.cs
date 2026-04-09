@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BotApi.Services;
+using BotApi.Models;
 
 namespace BotApi.Controllers;
 
@@ -35,7 +36,7 @@ public class ProvisioningController : ControllerBase
         {
             return StatusCode(500, new
             {
-                error = "Provisionierung fehlgeschlagen",
+                error = "Provisionierung fehlgeschlagen"+ex.Message,
                 details = ex.Message
             });
         }
