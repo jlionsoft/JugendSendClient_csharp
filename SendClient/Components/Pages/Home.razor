@@ -83,8 +83,7 @@ else
         try
         {
             var payload = new { message = Message };
-            var response = await Http.PostAsJsonAsync("https://bot-api.joloewen.de/send", payload);
-
+            var response = await Http.PostAsJsonAsync("https://bot-api.joloewen.de/api/Message/send", payload);
             if (response.IsSuccessStatusCode)
             {
                 SendSuccess = true;
