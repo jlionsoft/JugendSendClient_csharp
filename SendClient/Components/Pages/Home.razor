@@ -83,7 +83,17 @@ else
         try
         {
             var payload = new { message = Message };
-            var response = await Http.PostAsJsonAsync("https://bot-api.joloewen.de/api/Message/send", payload);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://bot-api.joloewen.de/api/Message/send")
+            {
+                Content = JsonContent.Create(payload)
+            };
+
+            // Passwort-Header hinzufügen
+            request.Headers.Add("X-Admin-Password", Config["AdminPassword"]);
+
+            var response = await Http.SendAsync(request);
+
             if (response.IsSuccessStatusCode)
             {
                 SendSuccess = true;
