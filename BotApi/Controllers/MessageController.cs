@@ -22,12 +22,12 @@ public class MessageController : ControllerBase
     {
         if (string.IsNullOrWhiteSpace(request.Message))
             return BadRequest("Message missing");
-
+        
         var password = Request.Headers["X-Admin-Password"].ToString();
         var correctPassword = _config["AdminPassword"];
 
-        //if (password != correctPassword)
-        //    return Unauthorized();
+        if (password != correctPassword)
+            return Unauthorized();
 
         await _messageService.SendToYouthAsync(request.Message);
 

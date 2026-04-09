@@ -121,7 +121,9 @@ public class MatrixService
         if (members.Count != 2)
             return false;
 
-        return members.Contains(matrixUserId) && members.Contains(botUserId);
+
+        bool r = members.Contains(matrixUserId) && members.Contains(botUserId);
+        return r;
     }
 
     // ------------------------------------------------------------
