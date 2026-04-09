@@ -36,7 +36,7 @@ public class AuthentikUserService
         return resp?.Results.FirstOrDefault();
     }
 
-    public async Task<AuthentikUser> CreateUserAsync(string username, string email, string password)
+    public async Task<AuthentikUser> CreateUserAsync(string username, string? displayName, string? email)
     {
         var baseUrl = _config["Authentik:BaseUrl"];
         ApplyAuthHeader();
@@ -46,8 +46,8 @@ public class AuthentikUserService
         var payload = new
         {
             username,
-            email,
-            password
+            name = displayName,   // Anzeigename
+            email = email         // optional
         };
 
         var response = await _http.PostAsJsonAsync(url, payload);
@@ -56,7 +56,6 @@ public class AuthentikUserService
         var user = await response.Content.ReadFromJsonAsync<AuthentikUser>();
         return user!;
     }
-
     public async Task<bool> IsUserInGroupAsync(int userPk, string groupId)
     {
         var baseUrl = _config["Authentik:BaseUrl"];
@@ -73,7 +72,7 @@ public class AuthentikUserService
         var baseUrl = _config["Authentik:BaseUrl"];
         ApplyAuthHeader();
 
-        var url = $"{baseUrl}/api/v3/core/groups/{groupId}/users/";
+        var url = $"{baseUrl}/api/v3/core/groups/{groupId}/add_user/";
 
         var payload = new { pk = userPk };
 
@@ -121,6 +120,7 @@ public class MatrixAdminService
     {
         var homeserver = _config["Matrix:Homeserver"];
         ApplyAdminAuthHeader();
+        _logger.LogInformation("Matrix: Creating user {UserId} with password {Password}", matrixUserId, password);
 
         var url = $"{homeserver}/_synapse/admin/v2/users/{Uri.EscapeDataString(matrixUserId)}";
 
@@ -133,6 +133,14 @@ public class MatrixAdminService
 
         var response = await _http.PutAsJsonAsync(url, payload);
         response.EnsureSuccessStatusCode();
+    }
+    private readonly ILogger<MatrixAdminService> _logger;
+
+    public MatrixAdminService(HttpClient http, IConfiguration config, ILogger<MatrixAdminService> logger)
+    {
+        _http = http;
+        _config = config;
+        _logger = logger;
     }
 }
 
@@ -156,7 +164,7 @@ public class UserProvisioningService
         _config = config;
     }
 
-    public async Task EnsureUserProvisionedAsync(string username)
+    public async Task EnsureUserProvisionedAsync(string username, string? displayName, string? email)
     {
         var groupId = _config["Authentik:YouthGroupId"];
 
@@ -167,8 +175,8 @@ public class UserProvisioningService
         {
             user = await _authentik.CreateUserAsync(
                 username,
-                email: "",
-                password: GenerateSecurePassword()
+                displayName,
+                email
             );
         }
 
@@ -185,12 +193,11 @@ public class UserProvisioningService
         {
             await _matrix.CreateUserAsync(
                 matrixUserId,
-                password: GenerateSecurePassword(),
-                displayName: username
+                password: GenerateSecurePassword(), // Matrix braucht zwingend ein Passwort
+                displayName: displayName ?? username
             );
         }
     }
-
     private string GenerateSecurePassword()
     {
         return Guid.NewGuid().ToString("N");

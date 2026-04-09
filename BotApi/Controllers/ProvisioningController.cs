@@ -19,14 +19,18 @@ public class ProvisioningController : ControllerBase
     /// Provisioniert einen Benutzer in Authentik + Gruppe + Matrix.
     /// </summary>
     [HttpPost("{username}")]
-    public async Task<IActionResult> ProvisionUser(string username)
+    public async Task<IActionResult> ProvisionUser(
+        string username,
+        [FromQuery] string? displayName,
+        [FromQuery] string? email)
     {
         if (string.IsNullOrWhiteSpace(username))
             return BadRequest("Username darf nicht leer sein.");
 
         try
         {
-            await _provisioning.EnsureUserProvisionedAsync(username);
+            await _provisioning.EnsureUserProvisionedAsync(username, displayName, email);
+
             return Ok(new
             {
                 message = $"Benutzer '{username}' wurde erfolgreich provisioniert."
@@ -36,7 +40,7 @@ public class ProvisioningController : ControllerBase
         {
             return StatusCode(500, new
             {
-                error = "Provisionierung fehlgeschlagen"+ex.Message,
+                error = "Provisionierung fehlgeschlagen. " + ex.Message,
                 details = ex.Message
             });
         }
