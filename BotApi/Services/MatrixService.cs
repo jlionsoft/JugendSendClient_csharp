@@ -21,6 +21,10 @@ public class MatrixService
 
     public async Task SendPrivateMessageAsync(string matrixUserId, string message)
     {
+        if (!await UserExistsAsync(matrixUserId))
+        {
+            return;
+        }
         var roomId = await EnsureDmRoomAsync(matrixUserId);
         await SendMessageToRoomAsync(roomId, message);
     }
@@ -211,5 +215,19 @@ public class MatrixService
     {
         [JsonPropertyName("room_id")]
         public string RoomId { get; set; }
+    }
+
+    public async Task<bool> UserExistsAsync(string matrixUserId)
+    {
+        var homeserver = _config["Matrix:Homeserver"];
+        var token = _config["Matrix:BotToken"];
+
+        _http.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", token);
+
+        var url = $"{homeserver}/_matrix/client/v3/profile/{matrixUserId}";
+        var response = await _http.GetAsync(url);
+
+        return response.IsSuccessStatusCode;
     }
 }
