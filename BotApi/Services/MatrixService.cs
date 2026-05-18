@@ -73,10 +73,21 @@ public class MatrixService
     {
         var direct = await GetDirectMappingAsync();
 
-        if (direct.TryGetValue(matrixUserId, out var rooms) && rooms.Count > 0)
-            return rooms.First();
+        if (!direct.TryGetValue(matrixUserId, out var rooms))
+            return null;
 
-        return null;
+        ApplyAuth();
+        var joinedUrl = $"{Homeserver}/_matrix/client/v3/joined_rooms";
+        var joined = await _http.GetFromJsonAsync<JoinedRoomsResponse>(joinedUrl);
+        var joinedSet = joined?.JoinedRooms.ToHashSet() ?? new HashSet<string>();
+
+        return rooms.FirstOrDefault(r => joinedSet.Contains(r));
+    }
+
+    public class JoinedRoomsResponse
+    {
+        [JsonPropertyName("joined_rooms")]
+        public List<string> JoinedRooms { get; set; }
     }
 
     // ------------------------------------------------------------
@@ -93,22 +104,31 @@ public class MatrixService
         if (!response.IsSuccessStatusCode)
             return new Dictionary<string, List<string>>();
 
-        var data = await response.Content.ReadFromJsonAsync<DirectData>();
-        return data?.Direct ?? new Dictionary<string, List<string>>();
+        // Das Root-Objekt IST direkt die Map – kein "m.direct"-Wrapper
+        return await response.Content
+            .ReadFromJsonAsync<Dictionary<string, List<string>>>()
+            ?? new Dictionary<string, List<string>>();
     }
 
     public async Task SetDirectMappingAsync(string matrixUserId, string roomId)
     {
         ApplyAuth();
 
-        var url = $"{Homeserver}/_matrix/client/v3/user/{BotUserId}/account_data/m.direct";
+        // Erst bestehende Map laden
+        var existing = await GetDirectMappingAsync();
 
-        var payload = new Dictionary<string, List<string>>
+        // Eintrag hinzufügen oder aktualisieren
+        if (!existing.TryGetValue(matrixUserId, out var rooms))
         {
-            { matrixUserId, new List<string> { roomId } }
-        };
+            rooms = new List<string>();
+            existing[matrixUserId] = rooms;
+        }
 
-        await _http.PutAsJsonAsync(url, payload);
+        if (!rooms.Contains(roomId))
+            rooms.Add(roomId);
+
+        var url = $"{Homeserver}/_matrix/client/v3/user/{BotUserId}/account_data/m.direct";
+        await _http.PutAsJsonAsync(url, existing);
     }
 
     public class DirectData
