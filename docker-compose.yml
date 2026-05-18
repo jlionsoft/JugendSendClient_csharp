@@ -1,0 +1,38 @@
+services:
+  botapi:
+    build:
+      context: ./BotApi
+      dockerfile: Dockerfile
+    container_name: botapi
+    environment:
+      AdminPassword: ${ADMIN_PASSWORD}
+      Authentik__BaseUrl: https://authentik.joloewen.de
+      Authentik__Token: ${AUTHENTIK_TOKEN}
+      Authentik__YouthGroupId: ${YOUTH_GROUP_ID}
+      Matrix__Homeserver: https://matrix.joloewen.de
+      Matrix__BotToken: ${MATRIX_BOT_TOKEN}
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - sam-net
+
+  miniweb:
+    build:
+      context: ./SendClient
+      dockerfile: Dockerfile
+    container_name: miniweb
+    environment:
+      AdminPassword: ${ADMIN_PASSWORD}
+      ApiBaseUrl: https://bot-api.joloewen.de
+    ports:
+      - "8090:8080"
+    restart: unless-stopped
+    depends_on:
+      - botapi
+    networks:
+      - sam-net
+
+networks:
+  sam-net:
+    external: true

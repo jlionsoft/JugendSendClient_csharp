@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Projektmappenelemente/">
+    <File Path="docker-compose.yml" />
+  </Folder>
   <Project Path="BotApi/BotApi.csproj" />
   <Project Path="SendClient/SendClient.csproj" />
 </Solution>
