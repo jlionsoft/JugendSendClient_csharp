@@ -15,26 +15,35 @@ public class MatrixService
         _config = config;
     }
 
+    private string Homeserver => _config["Matrix:Homeserver"];
+    private string BotToken => _config["Matrix:BotToken"];
+    private string BotUserId => _config["Matrix:BotUserId"];
+
+    private void ApplyAuth()
+    {
+        _http.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", BotToken);
+    }
+
+    // ------------------------------------------------------------
+    // PUBLIC API
+    // ------------------------------------------------------------
+
     public async Task SendPrivateMessageAsync(string matrixUserId, string message)
     {
         if (!await UserExistsAsync(matrixUserId))
-        {
             return;
-        }
+
         var roomId = await EnsureDmRoomAsync(matrixUserId);
         await SendMessageToRoomAsync(roomId, message);
     }
 
     public async Task SendMessageToRoomAsync(string roomId, string message)
     {
-        var homeserver = _config["Matrix:Homeserver"];
-        var token = _config["Matrix:BotToken"];
-
-        _http.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", token);
+        ApplyAuth();
 
         var txnId = Guid.NewGuid().ToString();
-        var url = $"{homeserver}/_matrix/client/v3/rooms/{roomId}/send/m.room.message/{txnId}";
+        var url = $"{Homeserver}/_matrix/client/v3/rooms/{roomId}/send/m.room.message/{txnId}";
 
         var payload = new
         {
@@ -45,124 +54,78 @@ public class MatrixService
         await _http.PutAsJsonAsync(url, payload);
     }
 
+    // ------------------------------------------------------------
+    // DM ROOM HANDLING
+    // ------------------------------------------------------------
+
     public async Task<string> EnsureDmRoomAsync(string matrixUserId)
     {
         var existing = await FindExistingDmRoomAsync(matrixUserId);
         if (existing != null)
             return existing;
 
-        return await CreateDmRoomAsync(matrixUserId);
+        var roomId = await CreateDmRoomAsync(matrixUserId);
+        await SetDirectMappingAsync(matrixUserId, roomId);
+        return roomId;
     }
 
     public async Task<string?> FindExistingDmRoomAsync(string matrixUserId)
     {
-        var rooms = await GetBotJoinedRoomsAsync();
+        var direct = await GetDirectMappingAsync();
 
-        foreach (var roomId in rooms)
-        {
-            if (await IsDirectRoomAsync(roomId, matrixUserId))
-                return roomId;
-        }
+        if (direct.TryGetValue(matrixUserId, out var rooms) && rooms.Count > 0)
+            return rooms.First();
 
         return null;
     }
 
-    public async Task<List<string>> GetBotJoinedRoomsAsync()
+    // ------------------------------------------------------------
+    // m.direct ACCOUNT DATA
+    // ------------------------------------------------------------
+
+    public async Task<Dictionary<string, List<string>>> GetDirectMappingAsync()
     {
-        var homeserver = _config["Matrix:Homeserver"];
-        var token = _config["Matrix:BotToken"];
+        ApplyAuth();
 
-        _http.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", token);
-
-        var url = $"{homeserver}/_matrix/client/v3/joined_rooms";
-
-        var response = await _http.GetFromJsonAsync<JoinedRoomsResponse>(url);
-        return response?.JoinedRooms ?? new List<string>();
-    }
-
-    public class JoinedRoomsResponse
-    {
-        [JsonPropertyName("joined_rooms")]
-        public List<string> JoinedRooms { get; set; }
-    }
-
-    public async Task<bool> IsDirectRoomAsync(string roomId, string matrixUserId)
-    {
-        var botUserId = _config["Matrix:BotUserId"];
-
-        // 1. Membership des Users prüfen
-        var membership = await GetUserMembershipAsync(roomId, matrixUserId);
-
-        if (membership != "join")
-            return false;
-
-        // 2. Mitgliederliste abrufen
-        var members = await GetRoomMembersAsync(roomId);
-
-        // 3. DM-Raum hat genau 2 Mitglieder
-        if (members.Count != 2)
-            return false;
-
-
-        bool r = members.Contains(matrixUserId) && members.Contains(botUserId);
-        return r;
-    }
-
-    public async Task<List<string>> GetRoomMembersAsync(string roomId)
-    {
-        var homeserver = _config["Matrix:Homeserver"];
-        var token = _config["Matrix:BotToken"];
-
-        _http.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", token);
-
-        var url = $"{homeserver}/_matrix/client/v3/rooms/{roomId}/joined_members";
-
-        var response = await _http.GetFromJsonAsync<JoinedMembersResponse>(url);
-        return response?.Joined.Keys.ToList() ?? new List<string>();
-    }
-
-    public class JoinedMembersResponse
-    {
-        [JsonPropertyName("joined")]
-        public Dictionary<string, object> Joined { get; set; }
-    }
-
-    public async Task<string?> GetUserMembershipAsync(string roomId, string matrixUserId)
-    {
-        var homeserver = _config["Matrix:Homeserver"];
-        var token = _config["Matrix:BotToken"];
-
-        _http.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", token);
-
-        var url = $"{homeserver}/_matrix/client/v3/rooms/{roomId}/state/m.room.member/{matrixUserId}";
-
+        var url = $"{Homeserver}/_matrix/client/v3/user/{BotUserId}/account_data/m.direct";
         var response = await _http.GetAsync(url);
 
         if (!response.IsSuccessStatusCode)
-            return null;
+            return new Dictionary<string, List<string>>();
 
-        var data = await response.Content.ReadFromJsonAsync<MemberState>();
-        return data?.Membership;
+        var data = await response.Content.ReadFromJsonAsync<DirectData>();
+        return data?.Direct ?? new Dictionary<string, List<string>>();
     }
 
-    public class MemberState
+    public async Task SetDirectMappingAsync(string matrixUserId, string roomId)
     {
-        [JsonPropertyName("membership")]
-        public string Membership { get; set; }
+        ApplyAuth();
+
+        var url = $"{Homeserver}/_matrix/client/v3/user/{BotUserId}/account_data/m.direct";
+
+        var payload = new Dictionary<string, List<string>>
+        {
+            { matrixUserId, new List<string> { roomId } }
+        };
+
+        await _http.PutAsJsonAsync(url, payload);
     }
+
+    public class DirectData
+    {
+        [JsonPropertyName("m.direct")]
+        public Dictionary<string, List<string>> Direct { get; set; }
+    }
+
+    // ------------------------------------------------------------
+    // ROOM CREATION
+    // ------------------------------------------------------------
 
     public async Task<string> CreateDmRoomAsync(string matrixUserId)
     {
-        var homeserver = _config["Matrix:Homeserver"];
-        var token = _config["Matrix:BotToken"];
+        ApplyAuth();
 
-        _http.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", token);
-
-        var url = $"{homeserver}/_matrix/client/v3/createRoom";
+        var url = $"{Homeserver}/_matrix/client/v3/createRoom";
 
         var payload = new
         {
@@ -184,15 +147,15 @@ public class MatrixService
         public string RoomId { get; set; }
     }
 
+    // ------------------------------------------------------------
+    // USER CHECK
+    // ------------------------------------------------------------
+
     public async Task<bool> UserExistsAsync(string matrixUserId)
     {
-        var homeserver = _config["Matrix:Homeserver"];
-        var token = _config["Matrix:BotToken"];
+        ApplyAuth();
 
-        _http.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", token);
-
-        var url = $"{homeserver}/_matrix/client/v3/profile/{matrixUserId}";
+        var url = $"{Homeserver}/_matrix/client/v3/profile/{matrixUserId}";
         var response = await _http.GetAsync(url);
 
         return response.IsSuccessStatusCode;
