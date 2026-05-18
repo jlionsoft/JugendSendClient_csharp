@@ -15,10 +15,6 @@ public class MatrixService
         _config = config;
     }
 
-    // ------------------------------------------------------------
-    // PUBLIC API
-    // ------------------------------------------------------------
-
     public async Task SendPrivateMessageAsync(string matrixUserId, string message)
     {
         if (!await UserExistsAsync(matrixUserId))
@@ -28,10 +24,6 @@ public class MatrixService
         var roomId = await EnsureDmRoomAsync(matrixUserId);
         await SendMessageToRoomAsync(roomId, message);
     }
-
-    // ------------------------------------------------------------
-    // SEND MESSAGE
-    // ------------------------------------------------------------
 
     public async Task SendMessageToRoomAsync(string roomId, string message)
     {
@@ -53,10 +45,6 @@ public class MatrixService
         await _http.PutAsJsonAsync(url, payload);
     }
 
-    // ------------------------------------------------------------
-    // ENSURE DM ROOM
-    // ------------------------------------------------------------
-
     public async Task<string> EnsureDmRoomAsync(string matrixUserId)
     {
         var existing = await FindExistingDmRoomAsync(matrixUserId);
@@ -65,10 +53,6 @@ public class MatrixService
 
         return await CreateDmRoomAsync(matrixUserId);
     }
-
-    // ------------------------------------------------------------
-    // FIND EXISTING DM ROOM
-    // ------------------------------------------------------------
 
     public async Task<string?> FindExistingDmRoomAsync(string matrixUserId)
     {
@@ -83,7 +67,6 @@ public class MatrixService
         return null;
     }
 
-    // Bot's joined rooms
     public async Task<List<string>> GetBotJoinedRoomsAsync()
     {
         var homeserver = _config["Matrix:Homeserver"];
@@ -103,10 +86,6 @@ public class MatrixService
         [JsonPropertyName("joined_rooms")]
         public List<string> JoinedRooms { get; set; }
     }
-
-    // ------------------------------------------------------------
-    // CHECK IF ROOM IS A REAL ACTIVE DM ROOM
-    // ------------------------------------------------------------
 
     public async Task<bool> IsDirectRoomAsync(string roomId, string matrixUserId)
     {
@@ -130,10 +109,6 @@ public class MatrixService
         return r;
     }
 
-    // ------------------------------------------------------------
-    // GET ROOM MEMBERS
-    // ------------------------------------------------------------
-
     public async Task<List<string>> GetRoomMembersAsync(string roomId)
     {
         var homeserver = _config["Matrix:Homeserver"];
@@ -153,10 +128,6 @@ public class MatrixService
         [JsonPropertyName("joined")]
         public Dictionary<string, object> Joined { get; set; }
     }
-
-    // ------------------------------------------------------------
-    // GET USER MEMBERSHIP (join / leave / ban)
-    // ------------------------------------------------------------
 
     public async Task<string?> GetUserMembershipAsync(string roomId, string matrixUserId)
     {
@@ -182,10 +153,6 @@ public class MatrixService
         [JsonPropertyName("membership")]
         public string Membership { get; set; }
     }
-
-    // ------------------------------------------------------------
-    // CREATE DM ROOM
-    // ------------------------------------------------------------
 
     public async Task<string> CreateDmRoomAsync(string matrixUserId)
     {
