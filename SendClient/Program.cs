@@ -21,7 +21,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(
         new DirectoryInfo("/root/.aspnet/DataProtection-Keys"))
-    .SetApplicationName("SendClientTest");
+    .SetApplicationName("SendClient");
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
