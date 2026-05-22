@@ -1,78 +1,48 @@
 ﻿@page "/"
-@inject IConfiguration Config
+@attribute [Authorize]
 @inject HttpClient Http
+@inject IConfiguration Config
 
 <PageTitle>Nachricht senden</PageTitle>
 
 <h3>Nachricht an Jugend senden</h3>
 
-@if (!IsAuthenticated)
-{
-    <div class="card p-3 mt-3" style="max-width: 400px;">
-        <h5>Login</h5>
-        <input type="password" class="form-control mt-2" placeholder="Passwort"
-               @bind="Password" @bind:event="oninput" />
+<AuthorizeView Policy="CanSend">
+    <Authorized>
+        <div class="card p-3 mt-3">
+            <h5>Nachricht eingeben</h5>
+            <textarea class="form-control" rows="5"
+                      placeholder="Deine Nachricht..."
+                      @bind="Message"></textarea>
+            <button class="btn btn-success mt-3"
+                    @onclick="SendMessage"
+                    disabled="@IsSending">
+                @(IsSending ? "Sende..." : "An alle senden")
+            </button>
 
-        <button class="btn btn-primary mt-3" @onclick="CheckPassword">
-            Login
-        </button>
-
-        @if (LoginFailed)
-        {
-            <p class="text-danger mt-2">Falsches Passwort.</p>
-        }
-    </div>
-}
-else
-{
-    <div class="card p-3 mt-3">
-        <h5>Nachricht eingeben</h5>
-
-        <textarea class="form-control" rows="5"
-                  placeholder="Deine Nachricht..."
-                  @bind="Message"></textarea>
-
-        <button class="btn btn-success mt-3" @onclick="SendMessage"
-                disabled="@IsSending">
-            @(IsSending ? "Sende..." : "An alle senden")
-        </button>
-
-        @if (SendSuccess)
-        {
-            <p class="text-success mt-2">Nachricht erfolgreich gesendet.</p>
-        }
-
-        @if (SendError)
-        {
-            <p class="text-danger mt-2">Fehler beim Senden der Nachricht.</p>
-        }
-    </div>
-}
+            @if (SendSuccess)
+            {
+                <p class="text-success mt-2">✓ Nachricht erfolgreich gesendet.</p>
+            }
+            @if (SendError)
+            {
+                <p class="text-danger mt-2">✗ Fehler beim Senden.</p>
+            }
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="alert alert-warning mt-3">
+            Du hast keine Berechtigung zum Senden.
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
-    private string Password = "";
     private string Message = "";
-    private bool IsAuthenticated = false;
-    private bool LoginFailed = false;
 
     private bool IsSending = false;
     private bool SendSuccess = false;
     private bool SendError = false;
-
-    private async Task CheckPassword()
-    {
-        var correctPassword = Config["AdminPassword"];
-
-        if (Password == correctPassword)
-        {
-            IsAuthenticated = true;
-            LoginFailed = false;
-        }
-        else
-        {
-            LoginFailed = true;
-        }
-    }
 
     private async Task SendMessage()
     {
@@ -90,7 +60,7 @@ else
             };
 
             // Passwort-Header hinzufügen
-            request.Headers.Add("X-Admin-Password", Config["AdminPassword"]);
+            request.Headers.Add("X-Admin-Password", "Password123");
 
             var response = await Http.SendAsync(request);
 
