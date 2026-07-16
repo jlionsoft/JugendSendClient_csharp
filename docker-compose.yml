@@ -15,7 +15,7 @@ services:
       - "8080:8080"
     restart: unless-stopped
     networks:
-      - sam-net
+      - jugend
 
   miniweb:
     build:
@@ -31,8 +31,8 @@ services:
     depends_on:
       - botapi
     networks:
-      - sam-net
+      - jugend
 
 networks:
-  sam-net:
+  jugend:
     external: true
