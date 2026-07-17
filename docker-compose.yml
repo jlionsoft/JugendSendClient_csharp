@@ -5,14 +5,18 @@ services:
       dockerfile: Dockerfile
     container_name: botapi
     environment:
-      AdminPassword: ${ADMIN_PASSWORD}
-      Authentik__BaseUrl: https://authentik.joloewen.de
-      Authentik__Token: ${AUTHENTIK_TOKEN}
-      Authentik__YouthGroupId: ${YOUTH_GROUP_ID}
-      Matrix__Homeserver: https://matrix.joloewen.de
-      Matrix__BotToken: ${MATRIX_BOT_TOKEN}
+      AdminPassword: ${AdminPassword}
+      Authentik__BaseUrl: ${AUTHENTIK__BASE_URL}
+      Authentik__Token: ${AUTHENTIK__TOKEN}
+      Authentik__YouthGroupId: ${AUTHENTIK__YOUTH_GROUP_ID}
+      Matrix__Homeserver: ${MATRIX__Homeserver}
+      Matrix__ServerName: ${MATRIX__SERVER_NAME}
+      Matrix__BotToken: ${MATRIX__BOT_TOKEN}
+      Matrix__BotUserId: ${MATRIX__BOT_USER_ID}
     ports:
       - "8080:8080"
+    dns:
+      - 1.1.1.1
     restart: unless-stopped
     networks:
       - jugend
@@ -23,10 +27,15 @@ services:
       dockerfile: Dockerfile
     container_name: miniweb
     environment:
-      AdminPassword: ${ADMIN_PASSWORD}
-      ApiBaseUrl: https://bot-api.joloewen.de
+      AdminPassword: ${AdminPassword}
+      Authentik__BaseUrl: ${AUTHENTIK__BASE_URL}
+      Authentik__ClientId: ${AUTHENTIK__CLIENT_ID}
+      Authentik__ClientSecret: ${AUTHENTIK__CLIENT_SECRET}
+      ApiBaseUrl: ${ApiBaseUrl}
     ports:
       - "8090:8080"
+    dns:
+      - 1.1.1.1
     restart: unless-stopped
     depends_on:
       - botapi
