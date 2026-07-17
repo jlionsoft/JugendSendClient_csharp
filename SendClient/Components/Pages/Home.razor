@@ -7,35 +7,26 @@
 
 <h3>Nachricht an Jugend senden</h3>
 
-<AuthorizeView Policy="CanSend">
-    <Authorized>
-        <div class="card p-3 mt-3">
-            <h5>Nachricht eingeben</h5>
-            <textarea class="form-control" rows="5"
-                      placeholder="Deine Nachricht..."
-                      @bind="Message"></textarea>
-            <button class="btn btn-success mt-3"
-                    @onclick="SendMessage"
-                    disabled="@IsSending">
-                @(IsSending ? "Sende..." : "An alle senden")
-            </button>
+<div class="card p-3 mt-3">
+    <h5>Nachricht eingeben</h5>
+    <textarea class="form-control" rows="5"
+              placeholder="Deine Nachricht..."
+              @bind="Message"></textarea>
+    <button class="btn btn-success mt-3"
+            @onclick="SendMessage"
+            disabled="@IsSending">
+        @(IsSending ? "Sende..." : "An alle senden")
+    </button>
 
-            @if (SendSuccess)
-            {
-                <p class="text-success mt-2">✓ Nachricht erfolgreich gesendet.</p>
-            }
-            @if (SendError)
-            {
-                <p class="text-danger mt-2">✗ Fehler beim Senden.</p>
-            }
-        </div>
-    </Authorized>
-    <NotAuthorized>
-        <div class="alert alert-warning mt-3">
-            Du hast keine Berechtigung zum Senden.
-        </div>
-    </NotAuthorized>
-</AuthorizeView>
+    @if (SendSuccess)
+    {
+        <p class="text-success mt-2">✓ Nachricht erfolgreich gesendet.</p>
+    }
+    @if (SendError)
+    {
+        <p class="text-danger mt-2">✗ Fehler beim Senden.</p>
+    }
+</div>
 
 @code {
     private string Message = "";
@@ -43,6 +34,18 @@
     private bool IsSending = false;
     private bool SendSuccess = false;
     private bool SendError = false;
+
+    // Konfigurationswerte aus appsettings (siehe Hinweis unten)
+    private string ApiBaseUrl = "";
+    private string SendEndpoint = "";
+    private string AdminPassword = "";
+
+    protected override void OnInitialized()
+    {
+        ApiBaseUrl = Config["BotApi:BaseUrl"] ?? "https://bot-api.joloewen.de";
+        SendEndpoint = Config["BotApi:SendEndpoint"] ?? "/api/Message/send";
+        AdminPassword = Config["BotApi:AdminPassword"] ?? "Password123";
+    }
 
     private async Task SendMessage()
     {
@@ -54,13 +57,15 @@
         {
             var payload = new { message = Message };
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://bot-api.joloewen.de/api/Message/send")
+            var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();
+
+            var request = new HttpRequestMessage(HttpMethod.Post, uri)
             {
                 Content = JsonContent.Create(payload)
             };
 
-            // Passwort-Header hinzufügen
-            request.Headers.Add("X-Admin-Password", "Password123");
+            // Passwort-Header aus Konfiguration hinzufügen
+            request.Headers.Add("X-Admin-Password", AdminPassword);
 
             var response = await Http.SendAsync(request);
 
