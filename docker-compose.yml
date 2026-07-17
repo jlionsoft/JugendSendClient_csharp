@@ -32,6 +32,9 @@ services:
       Authentik__ClientId: ${AUTHENTIK__CLIENT_ID}
       Authentik__ClientSecret: ${AUTHENTIK__CLIENT_SECRET}
       ApiBaseUrl: ${ApiBaseUrl}
+      BotApi__BaseUrl: ${BotApi__BaseUrl}
+      BotApi__SendEndpoint: ${BotApi__SendEndpoint}
+      BotApi__AdminPassword: ${BotApi__AdminPassword}
     ports:
       - "8090:8080"
     dns:
