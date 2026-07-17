@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
 .AddOpenIdConnect(options =>
 {
     options.Authority = builder.Configuration["Authentik:BaseUrl"]
-                        + "/application/o/send-client/";
+                        + "/application/o/juna/";
     options.ClientId = builder.Configuration["Authentik:ClientId"];
     options.ClientSecret = builder.Configuration["Authentik:ClientSecret"];
     options.ResponseType = OpenIdConnectResponseType.Code;
