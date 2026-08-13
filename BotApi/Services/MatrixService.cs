@@ -18,6 +18,7 @@ public class MatrixService
     private string Homeserver => _config["Matrix:Homeserver"];
     private string BotToken => _config["Matrix:BotToken"];
     private string BotUserId => _config["Matrix:BotUserId"];
+    public string ServerName => _config["Matrix:ServerName"];
 
     private void ApplyAuth()
     {

@@ -19,7 +19,7 @@ public class MessageService
 
         foreach (var user in users)
         {
-            var matrixId = $"@{user.Username}:matrix.joloewen.de";
+            var matrixId = $"@{user.Username}:{_matrix.ServerName}";
             await _matrix.SendPrivateMessageAsync(matrixId, message);
         }
     }
