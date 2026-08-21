@@ -17,6 +17,7 @@ builder.Services.AddSingleton<MessageService>();
 builder.Services.AddSingleton<UserProvisioningService>();
 builder.Services.AddSingleton<MatrixAdminService>();
 builder.Services.AddSingleton<AuthentikUserService>();
+builder.Services.AddHttpClient<SmsService>();
 
 var app = builder.Build();
 

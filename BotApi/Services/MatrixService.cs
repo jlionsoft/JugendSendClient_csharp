@@ -110,7 +110,7 @@ public class MatrixService
             .ReadFromJsonAsync<Dictionary<string, List<string>>>()
             ?? new Dictionary<string, List<string>>();
     }
-
+    
     public async Task SetDirectMappingAsync(string matrixUserId, string roomId)
     {
         ApplyAuth();

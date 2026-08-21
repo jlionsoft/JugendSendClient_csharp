@@ -28,9 +28,18 @@ public class AuthentikService
         var group = await _http.GetFromJsonAsync<AuthentikUserGroupDto>(url);
 
         var users = new List<AuthentikUser>();
-        foreach (var user in group.users_obj)
+        if (group?.users_obj != null)
         {
-            users.Add(new AuthentikUser { Username = user.username });
+            foreach (var user in group.users_obj)
+            {
+                users.Add(new AuthentikUser
+                {
+                    Pk = user.pk,
+                    Username = user.username ?? string.Empty,
+                    Email = user.email ?? string.Empty,
+                    Attributes = user.attributes
+                });
+            }
         }
         return users;
     }

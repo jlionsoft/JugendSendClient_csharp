@@ -17,6 +17,17 @@ public class AuthentikUser
 
     [JsonPropertyName("email")]
     public string Email { get; set; } = "";
+
+    // Optional custom attributes from Authentik
+    [JsonPropertyName("attributes")]
+    public Attributes? Attributes { get; set; }
+
+    // Convenience accessors
+    [JsonIgnore]
+    public string? PhoneNumber => Attributes?.PhoneNumber;
+
+    [JsonIgnore]
+    public bool SmsEnabled => Attributes?.Sms ?? false;
 }
 
 public class AuthentikUserListResponse

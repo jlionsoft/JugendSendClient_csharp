@@ -47,7 +47,7 @@ public class AuthentikUserService
         {
             username,
             name = displayName,   // Anzeigename
-            email = email         // optional
+            email         // optional
         };
 
         var response = await _http.PostAsJsonAsync(url, payload);

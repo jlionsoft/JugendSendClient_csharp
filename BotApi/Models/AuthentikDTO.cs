@@ -1,6 +1,13 @@
-﻿// Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+﻿using System.Text.Json.Serialization;
+
+// Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
 public class Attributes
 {
+    [JsonPropertyName("phone_number")]
+    public string? PhoneNumber { get; set; }
+
+    [JsonPropertyName("sms")]
+    public bool? Sms { get; set; }
 }
 
 public class AuthentikUserGroupDto
