@@ -25,6 +25,8 @@
 
         public async Task SendSmsAsync(string phoneNumber, string message)
         {
+            try
+            {
             var credentials = Convert.ToBase64String(
                 System.Text.Encoding.UTF8.GetBytes($"{Username}:{Password}")
             );
@@ -68,6 +70,14 @@
             if (!string.IsNullOrWhiteSpace(responseBody))
             {
                 Console.WriteLine($"SMS Gateway Response: {responseBody}");
+            }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally{
+                Console.WriteLine("Ansonsten anscheinende keine Fehler...");
             }
         }
     }
