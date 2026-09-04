@@ -119,7 +119,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
+app.UseStatusCodePagesWithReExecute("/not-found");
 
 // Kein UseHttpsRedirection hinter Cloudflare Tunnel!
 app.UseStaticFiles();
