@@ -90,12 +90,6 @@ public class MatrixAdminService
     private readonly HttpClient _http;
     private readonly IConfiguration _config;
 
-    public MatrixAdminService(HttpClient http, IConfiguration config)
-    {
-        _http = http;
-        _config = config;
-    }
-
     private void ApplyAdminAuthHeader()
     {
         var token = _config["Matrix:AdminToken"]; // eigener Admin-Token
