@@ -22,8 +22,11 @@ public class MessageService
     {
         if (string.IsNullOrWhiteSpace(message))
         {
-            await _ncTalk.SendMessageAsync(message);
+            return;
         }
+        
+        await _ncTalk.SendMessageAsync(message);
+
         var users = await _authentik.GetYouthUsersAsync();
 
         foreach (var user in users)
