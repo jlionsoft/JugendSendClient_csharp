@@ -1,0 +1,1835 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-09-11T06:17:16.3542939Z",
+  "analysisEndTime": "2026-09-11T06:17:16.4893257Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 2,
+      "issues": 5,
+      "incidents": 61,
+      "effort": 61
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 3,
+        "Optional": 0,
+        "Potential": 58,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 3,
+        "Project": 2,
+        "Api": 56
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "BotApi\\BotApi.csproj",
+      "startingProject": true,
+      "issues": 4,
+      "storyPoints": 25,
+      "properties": {
+        "appName": "BotApi",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "isTestProject": false,
+        "numberOfFiles": 16,
+        "numberOfCodeFiles": 14,
+        "linesTotal": 1363,
+        "linesOfCode": 1304,
+        "totalApiScanned": 1819,
+        "minLinesOfCodeToChange": 22,
+        "maxLinesOfCodeToChange": 22
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "d1463b68-1482-482c-b47a-5c4c56f368ea",
+          "ruleId": "NuGet.0002",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.OpenApi, 9.0.10\n\nEmpfehlung:\n\nRemove Microsoft.AspNetCore.OpenApi, and replace with new package Microsoft.AspNetCore.OpenApi 10.0.12",
+              "protected": "Microsoft.AspNetCore.OpenApi, 9.0.10\n\nEmpfehlung:\n\nRemove Microsoft.AspNetCore.OpenApi, and replace with new package Microsoft.AspNetCore.OpenApi 10.0.12"
+            },
+            "kind": "File",
+            "path": "BotApi\\BotApi.csproj",
+            "snippet": "Microsoft.AspNetCore.OpenApi, 9.0.10\n\nEmpfehlung:\n\nRemove Microsoft.AspNetCore.OpenApi, and replace with new package Microsoft.AspNetCore.OpenApi 10.0.12",
+            "protectedSnippet": "Microsoft.AspNetCore.OpenApi, 9.0.10\n\nEmpfehlung:\n\nRemove Microsoft.AspNetCore.OpenApi, and replace with new package Microsoft.AspNetCore.OpenApi 10.0.12",
+            "label": "Microsoft.AspNetCore.OpenApi 9.0.10",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.OpenApi",
+              "PackageVersion": "9.0.10",
+              "PackageNewVersion": "10.0.12",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "9b8c5de4-840e-45c2-a401-4fbd729abc8a",
+          "ruleId": "NuGet.0001",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets, 1.23.0\n\nEmpfehlung:\n\nKeine unterst\u00FCtzte Version gefunden",
+              "protected": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets, 1.23.0\n\nEmpfehlung:\n\nKeine unterst\u00FCtzte Version gefunden"
+            },
+            "kind": "File",
+            "path": "BotApi\\BotApi.csproj",
+            "snippet": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets, 1.23.0\n\nEmpfehlung:\n\nKeine unterst\u00FCtzte Version gefunden",
+            "protectedSnippet": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets, 1.23.0\n\nEmpfehlung:\n\nKeine unterst\u00FCtzte Version gefunden",
+            "label": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets 1.23.0",
+            "properties": {
+              "PackageId": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets",
+              "PackageVersion": "1.23.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "a7e44b56-a4eb-47d9-a32b-cffd0a87144c",
+          "ruleId": "Project.0002",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Aktuelles Zielframework: net9.0\nEmpfohlenes Zielframework: net10.0",
+              "protected": "Aktuelles Zielframework: net9.0\nEmpfohlenes Zielframework: net10.0"
+            },
+            "kind": "File",
+            "path": "BotApi\\BotApi.csproj",
+            "snippet": "Aktuelles Zielframework: net9.0\nEmpfohlenes Zielframework: net10.0",
+            "protectedSnippet": "Aktuelles Zielframework: net9.0\nEmpfohlenes Zielframework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "f8d8620a-3510-4cb7-b2b9-ff3d7306e807",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "request.Content = new StringContent(jsonBody, Encoding.UTF8, \u0022application/json\u0022);",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\Controllers\\NextcloudController.cs",
+            "snippet": "request.Content = new StringContent(jsonBody, Encoding.UTF8, \u0022application/json\u0022);",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "7411"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 141,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "a187c2f6-1d2c-448c-a184-39b80cf55f6a",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var result = await response.Content.ReadFromJsonAsync\u003CCreateRoomResponse\u003E();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\MatrixService.cs",
+            "snippet": "var result = await response.Content.ReadFromJsonAsync\u003CCreateRoomResponse\u003E();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "5843"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 160,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "c78d316e-d5ed-4df5-b990-2aa9575c61f4",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return await response.Content\r\n            .ReadFromJsonAsync\u003CDictionary\u003Cstring, List\u003Cstring\u003E\u003E\u003E()\r\n            ?? new Dictionary\u003Cstring, List\u003Cstring\u003E\u003E();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\MatrixService.cs",
+            "snippet": "return await response.Content\r\n            .ReadFromJsonAsync\u003CDictionary\u003Cstring, List\u003Cstring\u003E\u003E\u003E()\r\n            ?? new Dictionary\u003Cstring, List\u003Cstring\u003E\u003E();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "5843"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 108,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "1d57a3d2-08e7-4606-b4ca-417f19aa0dfe",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var responseBody = await response.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\SmsService.cs",
+            "snippet": "var responseBody = await response.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "2854"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 58,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "5f913ab2-31c3-40ab-8f7f-40f393d7e1ec",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "request.Content = new StringContent(\r\n                System.Text.Json.JsonSerializer.Serialize(data),\r\n                System.Text.Encoding.UTF8,\r\n                \u0022application/json\u0022\r\n            );",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\SmsService.cs",
+            "snippet": "request.Content = new StringContent(\r\n                System.Text.Json.JsonSerializer.Serialize(data),\r\n                System.Text.Encoding.UTF8,\r\n                \u0022application/json\u0022\r\n            );",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "2854"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 51,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "026766d2-20e5-4948-bad7-af7047f77a9a",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var url = $\u0022{homeserver}/_synapse/admin/v2/users/{Uri.EscapeDataString(matrixUserId)}\u0022;",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\UserProvisioningService.cs",
+            "snippet": "var url = $\u0022{homeserver}/_synapse/admin/v2/users/{Uri.EscapeDataString(matrixUserId)}\u0022;",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "6422"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 124,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "2fd4048a-6b4d-4669-91a6-6b44901adb0e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var url = $\u0022{homeserver}/_synapse/admin/v2/users/{Uri.EscapeDataString(matrixUserId)}\u0022;",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\UserProvisioningService.cs",
+            "snippet": "var url = $\u0022{homeserver}/_synapse/admin/v2/users/{Uri.EscapeDataString(matrixUserId)}\u0022;",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "6422"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 112,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "5918d7de-e36a-4140-aa20-62fc8085c3d5",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var user = await response.Content.ReadFromJsonAsync\u003CAuthentikUser\u003E();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\UserProvisioningService.cs",
+            "snippet": "var user = await response.Content.ReadFromJsonAsync\u003CAuthentikUser\u003E();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "6422"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 55,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "4c10c7dd-efc0-4797-b35d-5bb77780c02f",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var url = $\u0022{baseUrl}/api/v3/core/users/?username={Uri.EscapeDataString(username)}\u0022;",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\UserProvisioningService.cs",
+            "snippet": "var url = $\u0022{baseUrl}/api/v3/core/users/?username={Uri.EscapeDataString(username)}\u0022;",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "6422"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 32,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "cd71f8d3-a37e-4924-a3d5-71ef6be6910b",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var body = await response.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\NextcloudTalkService.cs",
+            "snippet": "var body = await response.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "4352"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 83,
+            "column": 20
+          }
+        },
+        {
+          "incidentId": "6cf697a5-a303-448c-a547-f4a917089cf5",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "request.Content = new StringContent(jsonBody, Encoding.UTF8, \u0022application/json\u0022);",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\Services\\NextcloudTalkService.cs",
+            "snippet": "request.Content = new StringContent(jsonBody, Encoding.UTF8, \u0022application/json\u0022);",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "4352"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 69,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "a178bc79-27c9-410e-a878-c8c969a11a10",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var body = await response.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\NextcloudTalk\\NextcloudTalkBot.cs",
+            "snippet": "var body = await response.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "10330"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 209,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "068af3aa-15a4-428f-ab31-881cc5c0a6e0",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "request.Content = new StringContent(jsonBody, Encoding.UTF8, \u0022application/json\u0022);",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "BotApi\\NextcloudTalk\\NextcloudTalkBot.cs",
+            "snippet": "request.Content = new StringContent(jsonBody, Encoding.UTF8, \u0022application/json\u0022);",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "10330"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 202,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "68b0ad8e-e77e-4c8e-b73b-c803e0bbba2e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 33,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "ee2b0f2f-b3c7-47e6-9a2e-1b0fcecf5945",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 33,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "8d8f3239-041b-4b4f-adcc-7d6b80f3edd1",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 33,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "3f513889-b025-4318-9ac9-e47103676c1e",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient(\u0022nextcloud\u0022, client =\u003E\r\n{\r\n    var baseUrl = builder.Configuration[\u0022NextcloudTalk:BaseUrl\u0022]\r\n        ?? throw new InvalidOperationException(\u0022NextcloudTalk:BaseUrl ist nicht konfiguriert.\u0022);\r\n    client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);\r\n});",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient(\u0022nextcloud\u0022, client =\u003E\r\n{\r\n    var baseUrl = builder.Configuration[\u0022NextcloudTalk:BaseUrl\u0022]\r\n        ?? throw new InvalidOperationException(\u0022NextcloudTalk:BaseUrl ist nicht konfiguriert.\u0022);\r\n    client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);\r\n});",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 29,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "5d177889-a359-4123-b12b-495cec59ec97",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 1
+          }
+        },
+        {
+          "incidentId": "a4a00587-d5f6-4b4d-a777-531a84cdbbbd",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 1
+          }
+        },
+        {
+          "incidentId": "0832ffb8-b29d-4a1e-95a2-01a876af71bf",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 1
+          }
+        },
+        {
+          "incidentId": "0a6b9e08-b13d-4ec7-8b93-4f5108f094e3",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient(\u0022nextcloud\u0022, client =\u003E\r\n{\r\n\tvar baseUrl = Environment.GetEnvironmentVariable(\u0022NEXTCLOUD_BASE_URL\u0022)\r\n\t\t?? throw new InvalidOperationException(\u0022Umgebungsvariable NEXTCLOUD_BASE_URL ist nicht gesetzt.\u0022);\r\n\tclient.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);\r\n});",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient(\u0022nextcloud\u0022, client =\u003E\r\n{\r\n\tvar baseUrl = Environment.GetEnvironmentVariable(\u0022NEXTCLOUD_BASE_URL\u0022)\r\n\t\t?? throw new InvalidOperationException(\u0022Umgebungsvariable NEXTCLOUD_BASE_URL ist nicht gesetzt.\u0022);\r\n\tclient.BaseAddress = new Uri(baseUrl.TrimEnd(\u0027/\u0027) \u002B \u0022/\u0022);\r\n});",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 15,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "a26d9f11-e9ca-4191-ba16-2169faf42960",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "BotApi\\BotApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)"
+            },
+            "kind": "File",
+            "path": "BotApi\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "properties": {
+              "CharCount": "1748"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 13,
+            "column": 0
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "SendClient\\SendClient.csproj",
+      "startingProject": true,
+      "issues": 4,
+      "storyPoints": 36,
+      "properties": {
+        "appName": "SendClient",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "isTestProject": false,
+        "numberOfFiles": 15,
+        "numberOfCodeFiles": 1,
+        "linesTotal": 543,
+        "linesOfCode": 156,
+        "totalApiScanned": 921,
+        "minLinesOfCodeToChange": 34,
+        "maxLinesOfCodeToChange": 34
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "e29460be-87ea-4945-b5f3-24b0cf6b2f13",
+          "ruleId": "NuGet.0002",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Authentication.OpenIdConnect, 9.0.10\n\nEmpfehlung:\n\nRemove Microsoft.AspNetCore.Authentication.OpenIdConnect, and replace with new package Microsoft.AspNetCore.Authentication.OpenIdConnect 10.0.12",
+              "protected": "Microsoft.AspNetCore.Authentication.OpenIdConnect, 9.0.10\n\nEmpfehlung:\n\nRemove Microsoft.AspNetCore.Authentication.OpenIdConnect, and replace with new package Microsoft.AspNetCore.Authentication.OpenIdConnect 10.0.12"
+            },
+            "kind": "File",
+            "path": "SendClient\\SendClient.csproj",
+            "snippet": "Microsoft.AspNetCore.Authentication.OpenIdConnect, 9.0.10\n\nEmpfehlung:\n\nRemove Microsoft.AspNetCore.Authentication.OpenIdConnect, and replace with new package Microsoft.AspNetCore.Authentication.OpenIdConnect 10.0.12",
+            "protectedSnippet": "Microsoft.AspNetCore.Authentication.OpenIdConnect, 9.0.10\n\nEmpfehlung:\n\nRemove Microsoft.AspNetCore.Authentication.OpenIdConnect, and replace with new package Microsoft.AspNetCore.Authentication.OpenIdConnect 10.0.12",
+            "label": "Microsoft.AspNetCore.Authentication.OpenIdConnect 9.0.10",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageVersion": "9.0.10",
+              "PackageNewVersion": "10.0.12",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "336ff4fc-b4ca-4a4e-bb55-46fcc39f7c31",
+          "ruleId": "Project.0002",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Aktuelles Zielframework: net9.0\nEmpfohlenes Zielframework: net10.0",
+              "protected": "Aktuelles Zielframework: net9.0\nEmpfohlenes Zielframework: net10.0"
+            },
+            "kind": "File",
+            "path": "SendClient\\SendClient.csproj",
+            "snippet": "Aktuelles Zielframework: net9.0\nEmpfohlenes Zielframework: net10.0",
+            "protectedSnippet": "Aktuelles Zielframework: net9.0\nEmpfohlenes Zielframework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "62ffa35e-2a37-4d8d-ba6a-e91e0b593ff5",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var request = new HttpRequestMessage(HttpMethod.Post, uri)\r\n            {\r\n                Content = JsonContent.Create(payload)\r\n            };",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "SendClient\\obj\\Debug\\net9.0\\Microsoft.CodeAnalysis.Razor.Compiler\\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\\Components/Pages/Home_razor.g.cs",
+            "snippet": "var request = new HttpRequestMessage(HttpMethod.Post, uri)\r\n            {\r\n                Content = JsonContent.Create(payload)\r\n            };",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "properties": {
+              "CharCount": "11403"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 261,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "857f9ff4-23db-49d2-8719-67ed7861bf33",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SendClient\\obj\\Debug\\net9.0\\Microsoft.CodeAnalysis.Razor.Compiler\\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\\Components/Pages/Home_razor.g.cs",
+            "snippet": "var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "11403"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 259,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "239c8f2c-35b6-4a50-b84b-929df5b0b2af",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "SendClient\\obj\\Debug\\net9.0\\Microsoft.CodeAnalysis.Razor.Compiler\\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\\Components/Pages/Home_razor.g.cs",
+            "snippet": "var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "properties": {
+              "CharCount": "11403"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 259,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "5b917fdc-7aae-45b3-87f1-0dec3a5394d0",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SendClient\\obj\\Debug\\net9.0\\Microsoft.CodeAnalysis.Razor.Compiler\\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\\Components/Pages/Home_razor.g.cs",
+            "snippet": "var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "properties": {
+              "CharCount": "11403"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 259,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "b48f840c-80db-4499-a494-154bdfa37ba1",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();",
+              "protected": "M:System.Uri.#ctor(System.Uri,System.String)"
+            },
+            "kind": "File",
+            "path": "SendClient\\obj\\Debug\\net9.0\\Microsoft.CodeAnalysis.Razor.Compiler\\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\\Components/Pages/Home_razor.g.cs",
+            "snippet": "var uri = new Uri(new Uri(ApiBaseUrl), SendEndpoint).ToString();",
+            "protectedSnippet": "M:System.Uri.#ctor(System.Uri,System.String)",
+            "label": "M:System.Uri.#ctor(System.Uri,System.String)",
+            "properties": {
+              "CharCount": "11403"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 259,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "9703affc-c565-4cf3-8dc1-0a4d296c129e",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "await ctx.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme,\r\n        new AuthenticationProperties { RedirectUri = \u0022/\u0022 });",
+              "protected": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "await ctx.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme,\r\n        new AuthenticationProperties { RedirectUri = \u0022/\u0022 });",
+            "protectedSnippet": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults",
+            "label": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 151,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "1caf47b4-b4d2-429f-a3e9-30695cf0cae4",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "await ctx.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme,\r\n        new AuthenticationProperties { RedirectUri = \u0022/\u0022 });",
+              "protected": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "await ctx.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme,\r\n        new AuthenticationProperties { RedirectUri = \u0022/\u0022 });",
+            "protectedSnippet": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme",
+            "label": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 151,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "dfc52b14-e2f8-4564-863b-4e7c0ae65877",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.MapGet(\u0022/login\u0022, () =\u003E\r\n    Results.Challenge(\r\n        new AuthenticationProperties { RedirectUri = \u0022/\u0022 },\r\n        new[] { OpenIdConnectDefaults.AuthenticationScheme }\r\n    ));",
+              "protected": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "app.MapGet(\u0022/login\u0022, () =\u003E\r\n    Results.Challenge(\r\n        new AuthenticationProperties { RedirectUri = \u0022/\u0022 },\r\n        new[] { OpenIdConnectDefaults.AuthenticationScheme }\r\n    ));",
+            "protectedSnippet": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults",
+            "label": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 142,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "f846b313-476d-46ef-9715-b8a2ff047736",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.MapGet(\u0022/login\u0022, () =\u003E\r\n    Results.Challenge(\r\n        new AuthenticationProperties { RedirectUri = \u0022/\u0022 },\r\n        new[] { OpenIdConnectDefaults.AuthenticationScheme }\r\n    ));",
+              "protected": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "app.MapGet(\u0022/login\u0022, () =\u003E\r\n    Results.Challenge(\r\n        new AuthenticationProperties { RedirectUri = \u0022/\u0022 },\r\n        new[] { OpenIdConnectDefaults.AuthenticationScheme }\r\n    ));",
+            "protectedSnippet": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme",
+            "label": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 142,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "45f82072-6b94-4bc4-9a8e-c8a98cf06b2b",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Exception diagnostics are suppressed when IExceptionHandler.TryHandleAsync returns true ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseExceptionHandler(\u0022/Error\u0022);",
+              "protected": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "app.UseExceptionHandler(\u0022/Error\u0022);",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "label": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "properties": {
+              "CharCount": "4903"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/10/exception-handler-diagnostics-suppressed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 118,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "5aa974e8-be67-4109-b2ba-8ce297b19495",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Forwarded Headers Middleware ignores X-Forwarded-* headers from unknown proxies ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseForwardedHeaders();",
+              "protected": "M:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders(Microsoft.AspNetCore.Builder.IApplicationBuilder)"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "app.UseForwardedHeaders();",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders(Microsoft.AspNetCore.Builder.IApplicationBuilder)",
+            "label": "M:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders(Microsoft.AspNetCore.Builder.IApplicationBuilder)",
+            "properties": {
+              "CharCount": "4903"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/8.0/forwarded-headers-unknown-proxies.md",
+                "isCustom": false
+              }
+            ],
+            "line": 104,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "e754af5a-2dcc-4510-8ba4-2eb134ed00bf",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents.OnTokenValidated"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents.OnTokenValidated",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents.OnTokenValidated",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 70,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "9a42a100-c371-4b2d-9466-92d5f5927de4",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+              "protected": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+            "protectedSnippet": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents",
+            "label": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 70,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "e99a825b-f0ab-40b2-b459-af1ffec0cab4",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+              "protected": "M:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents.#ctor"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents.#ctor",
+            "label": "M:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents.#ctor",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 70,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "62b2024b-93aa-4d23-a734-94a8ade93b23",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+              "protected": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+            "protectedSnippet": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents",
+            "label": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 70,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "0b1b03ef-a180-4af4-893e-d9e00848dfa4",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Events"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Events",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Events",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 70,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "652c0838-2240-4807-8aaf-fd0db1edf2d1",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.TokenValidationParameters = new()\r\n    {\r\n        NameClaimType = \u0022name\u0022,\r\n        RoleClaimType = \u0022groups\u0022\r\n    };",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.TokenValidationParameters"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.TokenValidationParameters = new()\r\n    {\r\n        NameClaimType = \u0022name\u0022,\r\n        RoleClaimType = \u0022groups\u0022\r\n    };",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.TokenValidationParameters",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.TokenValidationParameters",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 64,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "007a16b8-bf87-46a6-a674-4a221ee2324a",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Scope.Add(\u0022groups\u0022);",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Scope.Add(\u0022groups\u0022);",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 62,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "5f85d6cf-e0b4-4e81-8ff9-9e1ef43a0e18",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Scope.Add(\u0022email\u0022);",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Scope.Add(\u0022email\u0022);",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 61,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "4e07a91d-06e7-42d7-a46e-27abe0668b37",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Scope.Add(\u0022profile\u0022);",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Scope.Add(\u0022profile\u0022);",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 60,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "ef7f9fe6-fa04-42cb-9bbe-bf3d3caceafc",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Scope.Add(\u0022openid\u0022);",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Scope.Add(\u0022openid\u0022);",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 59,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "90faaaa1-c1b9-4628-bad4-6da63ab556f4",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Scope.Clear();",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Scope.Clear();",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Scope",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 58,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "ea386c79-1ca3-4743-97db-016f5eae0fdf",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.NonceCookie.SameSite = SameSiteMode.None;",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.NonceCookie"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.NonceCookie.SameSite = SameSiteMode.None;",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.NonceCookie",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.NonceCookie",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 56,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "4c4d060d-5415-41cf-a396-ae3cd392f70b",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.NonceCookie"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.NonceCookie",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.NonceCookie",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 55,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "95bcc010-3d8a-48fb-b196-0fcd2bbb20e3",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.ResponseType = OpenIdConnectResponseType.Code;",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ResponseType"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.ResponseType = OpenIdConnectResponseType.Code;",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ResponseType",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ResponseType",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 49,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "82cb7183-60e4-4ffe-b578-3185e9394ac7",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.ClientSecret = builder.Configuration[\u0022Authentik:ClientSecret\u0022];",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ClientSecret"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.ClientSecret = builder.Configuration[\u0022Authentik:ClientSecret\u0022];",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ClientSecret",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ClientSecret",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 48,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "b7906e0d-1115-4783-b10d-acf5c7ff86df",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.ClientId = builder.Configuration[\u0022Authentik:ClientId\u0022];",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ClientId"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.ClientId = builder.Configuration[\u0022Authentik:ClientId\u0022];",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ClientId",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.ClientId",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 47,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "dff2d7e4-803d-4e38-8d0f-49545db928e9",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Authority = builder.Configuration[\u0022Authentik:BaseUrl\u0022]\r\n                        \u002B \u0022/application/o/juna/\u0022;",
+              "protected": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Authority"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.Authority = builder.Configuration[\u0022Authentik:BaseUrl\u0022]\r\n                        \u002B \u0022/application/o/juna/\u0022;",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Authority",
+            "label": "P:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.Authority",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 45,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "8cce147a-a5a3-4425-a0e7-d599de67a73d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;",
+              "protected": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;",
+            "protectedSnippet": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults",
+            "label": "T:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 36,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "fd1548ad-ee7f-478f-8a8f-682d4112ee7d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;",
+              "protected": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;",
+            "protectedSnippet": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme",
+            "label": "F:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 36,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "cb059b75-45ab-478f-94fb-13d6df91bec8",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddAuthentication(options =\u003E\r\n{\r\n    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;\r\n    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;\r\n})\r\n.AddCookie(options =\u003E\r\n{\r\n    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.Cookie.SameSite = SameSiteMode.None;\r\n})\r\n.AddOpenIdConnect(options =\u003E\r\n{\r\n    options.Authority = builder.Configuration[\u0022Authentik:BaseUrl\u0022]\r\n                        \u002B \u0022/application/o/juna/\u0022;\r\n    options.ClientId = builder.Configuration[\u0022Authentik:ClientId\u0022];\r\n    options.ClientSecret = builder.Configuration[\u0022Authentik:ClientSecret\u0022];\r\n    options.ResponseType = OpenIdConnectResponseType.Code;\r\n    options.SaveTokens = true;\r\n    options.CallbackPath = \u0022/signin-oidc\u0022;\r\n\r\n    options.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.CorrelationCookie.SameSite = SameSiteMode.None;\r\n    options.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.NonceCookie.SameSite = SameSiteMode.None;\r\n\r\n    options.Scope.Clear();\r\n    options.Scope.Add(\u0022openid\u0022);\r\n    options.Scope.Add(\u0022profile\u0022);\r\n    options.Scope.Add(\u0022email\u0022);\r\n    options.Scope.Add(\u0022groups\u0022);\r\n\r\n    options.TokenValidationParameters = new()\r\n    {\r\n        NameClaimType = \u0022name\u0022,\r\n        RoleClaimType = \u0022groups\u0022\r\n    };\r\n\r\n    options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };\r\n});",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "builder.Services.AddAuthentication(options =\u003E\r\n{\r\n    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;\r\n    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;\r\n})\r\n.AddCookie(options =\u003E\r\n{\r\n    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.Cookie.SameSite = SameSiteMode.None;\r\n})\r\n.AddOpenIdConnect(options =\u003E\r\n{\r\n    options.Authority = builder.Configuration[\u0022Authentik:BaseUrl\u0022]\r\n                        \u002B \u0022/application/o/juna/\u0022;\r\n    options.ClientId = builder.Configuration[\u0022Authentik:ClientId\u0022];\r\n    options.ClientSecret = builder.Configuration[\u0022Authentik:ClientSecret\u0022];\r\n    options.ResponseType = OpenIdConnectResponseType.Code;\r\n    options.SaveTokens = true;\r\n    options.CallbackPath = \u0022/signin-oidc\u0022;\r\n\r\n    options.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.CorrelationCookie.SameSite = SameSiteMode.None;\r\n    options.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.NonceCookie.SameSite = SameSiteMode.None;\r\n\r\n    options.Scope.Clear();\r\n    options.Scope.Add(\u0022openid\u0022);\r\n    options.Scope.Add(\u0022profile\u0022);\r\n    options.Scope.Add(\u0022email\u0022);\r\n    options.Scope.Add(\u0022groups\u0022);\r\n\r\n    options.TokenValidationParameters = new()\r\n    {\r\n        NameClaimType = \u0022name\u0022,\r\n        RoleClaimType = \u0022groups\u0022\r\n    };\r\n\r\n    options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };\r\n});",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 33,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "2fed4591-c4eb-4bc0-95e9-8124e2eec05f",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6. Add package reference to Microsoft.AspNetCore.Authentication.OpenIdConnect, 8.0.6",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddAuthentication(options =\u003E\r\n{\r\n    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;\r\n    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;\r\n})\r\n.AddCookie(options =\u003E\r\n{\r\n    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.Cookie.SameSite = SameSiteMode.None;\r\n})\r\n.AddOpenIdConnect(options =\u003E\r\n{\r\n    options.Authority = builder.Configuration[\u0022Authentik:BaseUrl\u0022]\r\n                        \u002B \u0022/application/o/juna/\u0022;\r\n    options.ClientId = builder.Configuration[\u0022Authentik:ClientId\u0022];\r\n    options.ClientSecret = builder.Configuration[\u0022Authentik:ClientSecret\u0022];\r\n    options.ResponseType = OpenIdConnectResponseType.Code;\r\n    options.SaveTokens = true;\r\n    options.CallbackPath = \u0022/signin-oidc\u0022;\r\n\r\n    options.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.CorrelationCookie.SameSite = SameSiteMode.None;\r\n    options.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.NonceCookie.SameSite = SameSiteMode.None;\r\n\r\n    options.Scope.Clear();\r\n    options.Scope.Add(\u0022openid\u0022);\r\n    options.Scope.Add(\u0022profile\u0022);\r\n    options.Scope.Add(\u0022email\u0022);\r\n    options.Scope.Add(\u0022groups\u0022);\r\n\r\n    options.TokenValidationParameters = new()\r\n    {\r\n        NameClaimType = \u0022name\u0022,\r\n        RoleClaimType = \u0022groups\u0022\r\n    };\r\n\r\n    options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };\r\n});",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions.AddOpenIdConnect(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Action{Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions})"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "builder.Services.AddAuthentication(options =\u003E\r\n{\r\n    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;\r\n    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;\r\n})\r\n.AddCookie(options =\u003E\r\n{\r\n    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.Cookie.SameSite = SameSiteMode.None;\r\n})\r\n.AddOpenIdConnect(options =\u003E\r\n{\r\n    options.Authority = builder.Configuration[\u0022Authentik:BaseUrl\u0022]\r\n                        \u002B \u0022/application/o/juna/\u0022;\r\n    options.ClientId = builder.Configuration[\u0022Authentik:ClientId\u0022];\r\n    options.ClientSecret = builder.Configuration[\u0022Authentik:ClientSecret\u0022];\r\n    options.ResponseType = OpenIdConnectResponseType.Code;\r\n    options.SaveTokens = true;\r\n    options.CallbackPath = \u0022/signin-oidc\u0022;\r\n\r\n    options.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.CorrelationCookie.SameSite = SameSiteMode.None;\r\n    options.NonceCookie.SecurePolicy = CookieSecurePolicy.Always;\r\n    options.NonceCookie.SameSite = SameSiteMode.None;\r\n\r\n    options.Scope.Clear();\r\n    options.Scope.Add(\u0022openid\u0022);\r\n    options.Scope.Add(\u0022profile\u0022);\r\n    options.Scope.Add(\u0022email\u0022);\r\n    options.Scope.Add(\u0022groups\u0022);\r\n\r\n    options.TokenValidationParameters = new()\r\n    {\r\n        NameClaimType = \u0022name\u0022,\r\n        RoleClaimType = \u0022groups\u0022\r\n    };\r\n\r\n    options.Events = new OpenIdConnectEvents\r\n    {\r\n        OnTokenValidated = ctx =\u003E\r\n        {\r\n            var identity = ctx.Principal?.Identity as ClaimsIdentity;\r\n            if (identity == null) return Task.CompletedTask;\r\n\r\n            var groups = ctx.Principal!\r\n                .FindAll(\u0022groups\u0022)\r\n                .ToList();\r\n\r\n            foreach (var group in groups)\r\n                identity.AddClaim(new Claim(ClaimTypes.Role, group.Value));\r\n\r\n            return Task.CompletedTask;\r\n        }\r\n    };\r\n});",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions.AddOpenIdConnect(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Action{Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions.AddOpenIdConnect(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Action{Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions})",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+              "PackageNewVersion": "8.0.6",
+              "CharCount": "4903"
+            },
+            "line": 33,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "1ea549af-165c-490f-8192-9475d0b80718",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: IPNetwork and ForwardedHeadersOptions.KnownNetworks are obsolete ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.KnownNetworks.Clear();",
+              "protected": "P:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "options.KnownNetworks.Clear();",
+            "protectedSnippet": "P:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks",
+            "label": "P:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks",
+            "properties": {
+              "CharCount": "4903"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/10/ipnetwork-knownnetworks-obsolete.md",
+                "isCustom": false
+              }
+            ],
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "b78200b1-afb1-4437-846c-0e78ecf9d045",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "SendClient\\SendClient.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)"
+            },
+            "kind": "File",
+            "path": "SendClient\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "properties": {
+              "CharCount": "4903"
+            },
+            "links": [
+              {
+                "title": "API-Dokumentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 18,
+            "column": 0
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "F\u00FCr das ausgew\u00E4hlte Zielframework wird ein NuGet-Paketupgrade empfohlen.\n\nStandardm\u00E4\u00DFige .NET-Pakete werden empfohlen, um Versionen zu verwenden, die der Version von .NET entsprechen, auf die das Projekt abzielt.\n\nAuch einige andere Pakete funktionieren f\u00FCr die ausgew\u00E4hlten Zielframeworks bekanntlich besser.",
+      "label": "Ein NuGet-Paketupgrade wird empfohlen",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0001": {
+      "id": "NuGet.0001",
+      "isFeature": false,
+      "description": "Das NuGet-Paket ist nicht mit dem ausgew\u00E4hlten Zielframework kompatibel.\n\nF\u00FCr das Paket muss ein Upgrade auf eine Version durchgef\u00FChrt werden, die das ausgew\u00E4hlte Projektzielframework unterst\u00FCtzt. Wenn keine neuen Paketversionen vorhanden sind, die das neue Zielframework unterst\u00FCtzen, muss ein anderes Paket verwendet werden, und f\u00FCr den gesamten Code muss ein Upgrade auf die neue API durchgef\u00FChrt werden.",
+      "label": "Das NuGet-Paket ist nicht kompatibel",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262529",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Die Zielframeworks des Projekts m\u00FCssen in das neue Zielframework ge\u00E4ndert werden, das Sie f\u00FCr dieses Upgrade ausgew\u00E4hlt haben.\n\nW\u00E4hrend des Upgrades wird das Zielframework an die entsprechende Plattform angepasst, falls zutreffend. In einigen F\u00E4llen, f\u00FChrte das Upgrade des Projekts zu mehreren Zielframeworks, wenn es Features verwendete, die jetzt \u00FCber eigene Plattformen in modernen .NET-Frameworks (Windows, iOS, Android usw.) verf\u00FCgen.",
+      "label": "Die Zielframeworks des Projekts m\u00FCssen ge\u00E4ndert werden",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "\u00DCbersicht \u00FCber das Portieren von .NET\u00A0Framework zu .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET-Projekt-SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "Die API beinhaltet eine Verhaltens\u00E4nderung in der ausgew\u00E4hlten .NET-Version: Code und Bin\u00E4rdateien verhalten sich zur Laufzeit m\u00F6glicherweise anders, ohne dass eine Neukompilierung erforderlich ist, doch das neue Verhalten ist m\u00F6glicherweise unerw\u00FCnscht und erfordert Updates.",
+      "label": "Verhaltens\u00E4nderung bei ausgew\u00E4hlter .NET-Version",
+      "severity": "Potential",
+      "effort": 1
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "Die API ist mit der ausgew\u00E4hlten .NET-Version inkompatibel: erfordert Code\u00E4nderungen, um erfolgreich kompiliert zu werden, wenn eine neue Version als Zielplattform gew\u00E4hlt wird, z.\u00A0B. das Entfernen veralteter APIs oder das \u00C4ndern von Methodensignaturen.",
+      "label": "Die Quelle ist mit der ausgew\u00E4hlten .NET-Version inkompatibel.",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking Changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

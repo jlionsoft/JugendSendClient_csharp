@@ -15,10 +15,10 @@ public class MatrixService
         _config = config;
     }
 
-    private string Homeserver => _config["Matrix:Homeserver"];
-    private string BotToken => _config["Matrix:BotToken"];
-    private string BotUserId => _config["Matrix:BotUserId"];
-    public string ServerName => _config["Matrix:ServerName"];
+    private string Homeserver => _config["Matrix:Homeserver"] ?? string.Empty;
+    private string BotToken => _config["Matrix:BotToken"] ?? string.Empty;
+    private string BotUserId => _config["Matrix:BotUserId"] ?? string.Empty;
+    public string ServerName => _config["Matrix:ServerName"] ?? string.Empty;
 
     private void ApplyAuth()
     {
@@ -80,7 +80,7 @@ public class MatrixService
         ApplyAuth();
         var joinedUrl = $"{Homeserver}/_matrix/client/v3/joined_rooms";
         var joined = await _http.GetFromJsonAsync<JoinedRoomsResponse>(joinedUrl);
-        var joinedSet = joined?.JoinedRooms.ToHashSet() ?? new HashSet<string>();
+        var joinedSet = joined?.JoinedRooms?.ToHashSet() ?? new HashSet<string>();
 
         return rooms.FirstOrDefault(r => joinedSet.Contains(r));
     }
@@ -88,7 +88,7 @@ public class MatrixService
     public class JoinedRoomsResponse
     {
         [JsonPropertyName("joined_rooms")]
-        public List<string> JoinedRooms { get; set; }
+        public List<string>? JoinedRooms { get; set; }
     }
 
     // ------------------------------------------------------------
@@ -135,7 +135,7 @@ public class MatrixService
     public class DirectData
     {
         [JsonPropertyName("m.direct")]
-        public Dictionary<string, List<string>> Direct { get; set; }
+        public Dictionary<string, List<string>>? Direct { get; set; }
     }
 
     // ------------------------------------------------------------
@@ -159,13 +159,13 @@ public class MatrixService
         response.EnsureSuccessStatusCode();
 
         var result = await response.Content.ReadFromJsonAsync<CreateRoomResponse>();
-        return result.RoomId;
+        return result?.RoomId ?? string.Empty;
     }
 
     public class CreateRoomResponse
     {
         [JsonPropertyName("room_id")]
-        public string RoomId { get; set; }
+        public string? RoomId { get; set; }
     }
 
     // ------------------------------------------------------------
