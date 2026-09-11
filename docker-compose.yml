@@ -16,6 +16,9 @@ services:
       SMS__Gateway: ${SMS__Gateway}
       SMS__Username: ${SMS__Username}
       SMS__Password: ${SMS__Password}
+      NextcloudTalk__BaseUrl: ${NextcloudTalk__BaseUrl}
+      NextcloudTalk__BotSecret: ${NextcloudTalk__BotSecret}
+      NextcloudTalk__DefaultRoomToken: ${NextcloudTalk__DefaultRoomToken}
     ports:
       - "8080:8080"
     dns:
