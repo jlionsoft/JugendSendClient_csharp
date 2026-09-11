@@ -74,6 +74,31 @@ namespace BotApi.Services
             request.Headers.Add("X-Nextcloud-Talk-Bot-Signature", signature);
 
             var client = _httpFactory.CreateClient("nextcloud");
+            var requestUri = request.RequestUri;
+            if (requestUri is not null && !requestUri.IsAbsoluteUri && client.BaseAddress is not null)
+            {
+                requestUri = new Uri(client.BaseAddress, requestUri);
+            }
+
+            var requestBody = await request.Content.ReadAsStringAsync();
+            var requestLogBuilder = new StringBuilder();
+            requestLogBuilder.AppendLine("Ausgehende Nextcloud Talk Anfrage:");
+            requestLogBuilder.AppendLine($"{request.Method} {requestUri}");
+            requestLogBuilder.AppendLine("Headers:");
+
+            foreach (var header in request.Headers)
+            {
+                requestLogBuilder.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            }
+
+            foreach (var header in request.Content.Headers)
+            {
+                requestLogBuilder.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            }
+
+            requestLogBuilder.AppendLine("Body:");
+            requestLogBuilder.AppendLine(requestBody);
+            _logger.LogInformation("{RequestDetails}", requestLogBuilder.ToString());
 
             try
             {
