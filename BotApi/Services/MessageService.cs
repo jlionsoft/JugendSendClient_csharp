@@ -8,9 +8,9 @@ public class MessageService
     private readonly MatrixService _matrix;
     private readonly SmsService _sms;
 
-    private readonly NextcloudTalkService _ncTalk;
+    private readonly INextcloudTalkService _ncTalk;
 
-    public MessageService(AuthentikService authentik, MatrixService matrix, SmsService sms, NextcloudTalkService ncTalk)
+    public MessageService(AuthentikService authentik, MatrixService matrix, SmsService sms, INextcloudTalkService ncTalk)
     {
         _authentik = authentik;
         _matrix = matrix;
