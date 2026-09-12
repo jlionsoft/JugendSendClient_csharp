@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.DataProtection;
+// DataProtection persistent key storage removed for ephemeral container environments
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using SendClient.Components;
@@ -18,10 +18,8 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddDataProtection()
-    .PersistKeysToFileSystem(
-        new DirectoryInfo("/root/.aspnet/DataProtection-Keys"))
-    .SetApplicationName("SendClient");
+// DataProtection: persistent key storage disabled because container is ephemeral and behind proxy
+// Using default ephemeral keys (in-memory) so keys are not written to disk
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -126,7 +124,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseAntiforgery();
+// antiforgery middleware removed: not using persistent DataProtection keys in ephemeral container
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
