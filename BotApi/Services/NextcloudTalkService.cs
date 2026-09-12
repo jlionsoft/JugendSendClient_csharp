@@ -63,7 +63,12 @@ namespace BotApi.Services
             RandomNumberGenerator.Fill(randomBytes);
             var random = Convert.ToHexStringLower(randomBytes);
 
-            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_botSecret));
+            // 1. Raum-spezifisches Secret ableiten
+            using var roomHmac = new HMACSHA256(Encoding.UTF8.GetBytes(_botSecret));
+            var conversationSecret = roomHmac.ComputeHash(Encoding.UTF8.GetBytes(roomToken));
+
+            // 2. Mit diesem abgeleiteten Secret die eigentliche Nachricht signieren
+            using var hmac = new HMACSHA256(conversationSecret);
             var signature = Convert.ToHexStringLower(hmac.ComputeHash(Encoding.UTF8.GetBytes(random + jsonBody)));
 
             using var request = new HttpRequestMessage(HttpMethod.Post, $"ocs/v2.php/apps/spreed/api/v1/bot/{roomToken}/message");
