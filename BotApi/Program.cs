@@ -1,5 +1,4 @@
 using BotApi.Services;
-using BotApi.NextcloudTalk;
 
 var builder = WebApplication.CreateBuilder(args);
 
