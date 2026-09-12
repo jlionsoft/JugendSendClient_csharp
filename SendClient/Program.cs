@@ -123,7 +123,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-// antiforgery middleware removed: not using persistent DataProtection keys in ephemeral container
+app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
