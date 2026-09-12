@@ -49,6 +49,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Map Nextcloud Talk bot endpoints
-app.MapNextcloudTalkBot();
+//app.MapNextcloudTalkBot();
 
 app.Run();
