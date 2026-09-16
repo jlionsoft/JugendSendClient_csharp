@@ -8,11 +8,22 @@ on:
 
 jobs:
 
-  build:
+  build-api:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build BotApi --file BotApi/Dockerfile --tag jsc:$(date +%s)
+    - name: Build the Docker image for bot/api
+      run: docker build BotApi --file BotApi/Dockerfile --tag jsc-api:$(date +%s)
+
+
+
+  build-web:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image for SendClient
+      run: docker build SendClient --file SendClient/Dockerfile --tag jsc-web:$(date +%s)
