@@ -126,7 +126,8 @@ app.UseAuthorization();
 //app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode()
+    .DisableAntiforgery();
 
 app.MapGet("/debug-proto", (HttpContext ctx) =>
     Results.Ok(new
