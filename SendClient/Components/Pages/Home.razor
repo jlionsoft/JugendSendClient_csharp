@@ -2,6 +2,8 @@
 @attribute [Authorize]
 @inject HttpClient Http
 @inject IConfiguration Config
+@using System.Net.Http.Json
+@using System.Text.Json.Serialization
 
 <PageTitle>Nachricht senden</PageTitle>
 
@@ -21,10 +23,19 @@
     @if (SendSuccess)
     {
         <p class="text-success mt-2">✓ Nachricht erfolgreich gesendet.</p>
+        @if (LastResult is not null)
+        {
+            <div class="mt-2">
+                <p><strong>Nextcloud Talk:</strong> @(LastResult.NextcloudSuccess ? "Erfolgreich" : "Fehler beim Senden")</p>
+                <p><strong>Matrix-Nachrichten gesendet:</strong> @LastResult.MatrixSent</p>
+                <p><strong>SMS gesendet:</strong> @LastResult.SmsSent</p>
+            </div>
+        }
     }
     @if (SendError)
     {
         <p class="text-danger mt-2">✗ Fehler beim Senden.</p>
+        <p class="text-muted">@ResultMessage</p>
     }
 </div>
 
@@ -35,11 +46,33 @@
     private bool SendSuccess = false;
     private bool SendError = false;
     private string ResultMessage = "";
+    private SendResultDto? LastResult;
 
     // Konfigurationswerte aus appsettings (siehe Hinweis unten)
     private string ApiBaseUrl = "";
     private string SendEndpoint = "";
     private string AdminPassword = "";
+
+    private class SendResultDto
+    {
+        [JsonPropertyName("nextcloudSuccess")]
+        public bool NextcloudSuccess { get; set; }
+
+        [JsonPropertyName("matrixSent")]
+        public int MatrixSent { get; set; }
+
+        [JsonPropertyName("smsSent")]
+        public int SmsSent { get; set; }
+    }
+
+    private class SendResponseDto
+    {
+        [JsonPropertyName("status")]
+        public string? Status { get; set; }
+
+        [JsonPropertyName("result")]
+        public SendResultDto? Result { get; set; }
+    }
 
     protected override void OnInitialized()
     {
@@ -53,7 +86,6 @@
         IsSending = true;
         SendSuccess = false;
         SendError = false;
-
         try
         {
             var payload = new { message = Message };
@@ -72,19 +104,33 @@
 
             if (response.IsSuccessStatusCode)
             {
-                SendSuccess = true;
-                Message = "";
+                // Versucht, die strukturierte Antwort mit den Details zu lesen
+                var resp = await response.Content.ReadFromJsonAsync<SendResponseDto>();
+                if (resp?.Result is not null)
+                {
+                    LastResult = resp.Result;
+                    SendSuccess = true;
+                    Message = "";
+                    ResultMessage = "Nachricht gesendet. Details siehe unten.";
+                }
+                else
+                {
+                    SendSuccess = true;
+                    Message = "";
+                    ResultMessage = "Nachricht gesendet, aber keine Detailinformationen empfangen.";
+                    LastResult = null;
+                }
             }
             else
             {
                 SendError = true;
+                ResultMessage = await response.Content.ReadAsStringAsync();
             }
-            ResultMessage = response.Content.ReadAsStringAsync().Result;
-
         }
-        catch
+        catch (Exception ex)
         {
             SendError = true;
+            ResultMessage = ex.Message;
         }
 
         IsSending = false;
