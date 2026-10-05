@@ -12,4 +12,6 @@ public class SendResult
     // Optional: Listen der fehlgeschlagenen Empfänger (z.B. Matrix-IDs / Telefonnummern)
     public string[]? MatrixFailed { get; set; }
     public string[]? SmsFailed { get; set; }
+    // Gibt an, ob das SMS-Gateway vor dem Versand erreichbar war
+    public bool SmsGatewayAvailable { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using BotApi.Models;
 using System.Text;
+using System.Linq;
 
 namespace BotApi.Services;
 
@@ -51,6 +52,7 @@ public class MessageService
         // SMS total: only users with SMS enabled and phone number
         var smsTotal = users.Count(u => u.SmsEnabled && !string.IsNullOrEmpty(u.PhoneNumber));
 
+        // First: send Matrix messages for all users
         foreach (var user in users)
         {
             var matrixId = $"@{user.Username}:{_matrix.ServerName}";
@@ -64,7 +66,36 @@ public class MessageService
             {
                 matrixFailed.Add(matrixId);
             }
+        }
 
+        // Prüfen, ob SMS-Gateway erreichbar ist, bevor wir mit SMS versenden
+        var smsGatewayAvailable = await _sms.IsGatewayAvailableAsync();
+
+        if (!smsGatewayAvailable)
+        {
+            // Gateway nicht erreichbar: Markiere alle vorgesehenen SMS als fehlgeschlagen und überspringe das Versenden
+            smsCount = 0;
+            smsFailed.AddRange(users
+                .Where(u => u.SmsEnabled && !string.IsNullOrEmpty(u.PhoneNumber))
+                .Select(u => u.PhoneNumber!)
+            );
+
+            return new SendResult
+            {
+                NextcloudSuccess = nextcloudMessage,
+                MatrixSent = matrixCount,
+                SmsSent = smsCount,
+                MatrixTotal = matrixTotal,
+                SmsTotal = smsTotal,
+                MatrixFailed = matrixFailed.ToArray(),
+                SmsFailed = smsFailed.ToArray(),
+                SmsGatewayAvailable = false
+            };
+        }
+
+        // Wenn Gateway erreichbar ist: SMS versenden
+        foreach (var user in users)
+        {
             if (user.SmsEnabled && !string.IsNullOrEmpty(user.PhoneNumber))
             {
                 try
@@ -88,7 +119,8 @@ public class MessageService
             MatrixTotal = matrixTotal,
             SmsTotal = smsTotal,
             MatrixFailed = matrixFailed.ToArray(),
-            SmsFailed = smsFailed.ToArray()
+            SmsFailed = smsFailed.ToArray(),
+            SmsGatewayAvailable = true
         };
     }
 }

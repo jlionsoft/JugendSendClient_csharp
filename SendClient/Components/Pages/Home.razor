@@ -42,6 +42,12 @@
                 }
 
                 <p class="mt-2"><strong>SMS:</strong> @LastResult.SmsSent / @LastResult.SmsTotal erfolgreich</p>
+                @if (!LastResult.SmsGatewayAvailable)
+                {
+                    <div class="alert alert-danger p-2 mt-1">
+                        <small>SMS-Gateway nicht erreichbar. SMS-Versand wurde übersprungen.</small>
+                    </div>
+                }
                 @if (LastResult.SmsFailed?.Length > 0)
                 {
                     <div class="alert alert-warning p-2 mt-1">
@@ -99,6 +105,8 @@
 
         [JsonPropertyName("smsFailed")]
         public string[]? SmsFailed { get; set; }
+        [JsonPropertyName("smsGatewayAvailable")]
+        public bool SmsGatewayAvailable { get; set; }
     }
 
     private class SendResponseDto
