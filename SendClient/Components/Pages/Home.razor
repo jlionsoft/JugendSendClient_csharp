@@ -72,12 +72,13 @@
             if (response.IsSuccessStatusCode)
             {
                 SendSuccess = true;
-                Message = "";
             }
             else
             {
                 SendError = true;
             }
+            Message = response.Content.ReadAsStringAsync().Result;
+
         }
         catch
         {
