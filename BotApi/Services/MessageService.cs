@@ -1,4 +1,5 @@
 ﻿using BotApi.Models;
+using System.Text;
 
 namespace BotApi.Services;
 
@@ -18,26 +19,52 @@ public class MessageService
         _ncTalk = ncTalk;
     }
 
-    public async Task SendToYouthAsync(string message)
+    public async Task<SendResult> SendToYouthAsync(string message)
     {
         if (string.IsNullOrWhiteSpace(message))
         {
-            return;
+            return new SendResult { NextcloudSuccess = false, MatrixSent = 0, SmsSent = 0 };
         }
-        
-        await _ncTalk.SendMessageAsync(message);
+
+        var nextcloudMessage = await _ncTalk.SendMessageAsync(message);
 
         var users = await _authentik.GetYouthUsersAsync();
+
+        var matrixCount = 0;
+        var smsCount = 0;
 
         foreach (var user in users)
         {
             var matrixId = $"@{user.Username}:{_matrix.ServerName}";
-            await _matrix.SendPrivateMessageAsync(matrixId, message);
+            try
+            {
+                var matrixOk = await _matrix.SendPrivateMessageAsync(matrixId, message);
+                if (matrixOk) matrixCount++;
+            }
+            catch
+            {
+                // ignore individual failures
+            }
 
             if (user.SmsEnabled && !string.IsNullOrEmpty(user.PhoneNumber))
             {
-                await _sms.SendSmsAsync(user.PhoneNumber, message);
+                try
+                {
+                    var smsOk = await _sms.SendSmsAsync(user.PhoneNumber, message);
+                    if (smsOk) smsCount++;
+                }
+                catch
+                {
+                    // ignore
+                }
             }
         }
+
+        return new SendResult
+        {
+            NextcloudSuccess = nextcloudMessage,
+            MatrixSent = matrixCount,
+            SmsSent = smsCount
+        };
     }
 }

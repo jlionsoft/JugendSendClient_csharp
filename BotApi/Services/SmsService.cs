@@ -23,61 +23,52 @@
             _config["SMS:Password"]
             ?? throw new InvalidOperationException("SMS password is not configured");
 
-        public async Task SendSmsAsync(string phoneNumber, string message)
+        public async Task<bool> SendSmsAsync(string phoneNumber, string message)
         {
             try
             {
-            var credentials = Convert.ToBase64String(
-                System.Text.Encoding.UTF8.GetBytes($"{Username}:{Password}")
-            );
-
-            using var request = new HttpRequestMessage(
-                HttpMethod.Post,
-                $"{Gateway.TrimEnd('/')}/rest/tool/sms/send"
-            );
-
-            request.Headers.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue(
-                    "Basic",
-                    credentials
+                var credentials = Convert.ToBase64String(
+                    System.Text.Encoding.UTF8.GetBytes($"{Username}:{Password}")
                 );
 
-            var data = new Dictionary<string, string>
-            {
-                ["port"] = "lte1",
-                ["phone-number"] = phoneNumber,
-                ["message"] = message
-            };
-
-            request.Content = new StringContent(
-                System.Text.Json.JsonSerializer.Serialize(data),
-                System.Text.Encoding.UTF8,
-                "application/json"
-            );
-
-            using var response = await _httpClient.SendAsync(request);
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new InvalidOperationException(
-                    $"SMS konnte nicht gesendet werden. " +
-                    $"HTTP {(int)response.StatusCode} {response.StatusCode}: {responseBody}"
+                using var request = new HttpRequestMessage(
+                    HttpMethod.Post,
+                    $"{Gateway.TrimEnd('/')}/rest/tool/sms/send"
                 );
-            }
 
-            // Gateway liefert bei Erfolg ggf. einen leeren Response-Body.
-            if (!string.IsNullOrWhiteSpace(responseBody))
+                request.Headers.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue(
+                        "Basic",
+                        credentials
+                    );
+
+                var data = new Dictionary<string, string>
+                {
+                    ["port"] = "lte1",
+                    ["phone-number"] = phoneNumber,
+                    ["message"] = message
+                };
+
+                request.Content = new StringContent(
+                    System.Text.Json.JsonSerializer.Serialize(data),
+                    System.Text.Encoding.UTF8,
+                    "application/json"
+                );
+
+                using var response = await _httpClient.SendAsync(request);
+                var responseBody = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    _ = responseBody; // keep for debugging if needed
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception)
             {
-                Console.WriteLine($"SMS Gateway Response: {responseBody}");
-            }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally{
-                Console.WriteLine("Ansonsten anscheinende keine Fehler...");
+                return false;
             }
         }
     }

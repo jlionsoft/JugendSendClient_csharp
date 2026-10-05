@@ -29,8 +29,8 @@ public class MessageController : ControllerBase
         if (password != correctPassword)
             return Unauthorized();
 
-        await _messageService.SendToYouthAsync(request.Message);
+        var result = await _messageService.SendToYouthAsync(request.Message);
 
-        return Ok(new { status = "sent" });
+        return Ok(new { status = "sent", result });
     }
 }

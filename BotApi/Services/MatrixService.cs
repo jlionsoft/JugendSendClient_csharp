@@ -30,16 +30,16 @@ public class MatrixService
     // PUBLIC API
     // ------------------------------------------------------------
 
-    public async Task SendPrivateMessageAsync(string matrixUserId, string message)
+    public async Task<bool> SendPrivateMessageAsync(string matrixUserId, string message)
     {
         if (!await UserExistsAsync(matrixUserId))
-            return;
+            return false;
 
         var roomId = await EnsureDmRoomAsync(matrixUserId);
-        await SendMessageToRoomAsync(roomId, message);
+        return await SendMessageToRoomAsync(roomId, message);
     }
 
-    public async Task SendMessageToRoomAsync(string roomId, string message)
+    public async Task<bool> SendMessageToRoomAsync(string roomId, string message)
     {
         ApplyAuth();
 
@@ -52,7 +52,15 @@ public class MatrixService
             body = message
         };
 
-        await _http.PutAsJsonAsync(url, payload);
+        try
+        {
+            var response = await _http.PutAsJsonAsync(url, payload);
+            return response.IsSuccessStatusCode;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     // ------------------------------------------------------------
