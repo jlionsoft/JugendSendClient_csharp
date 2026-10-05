@@ -23,7 +23,16 @@ public class MessageService
     {
         if (string.IsNullOrWhiteSpace(message))
         {
-            return new SendResult { NextcloudSuccess = false, MatrixSent = 0, SmsSent = 0 };
+            return new SendResult
+            {
+                NextcloudSuccess = false,
+                MatrixSent = 0,
+                SmsSent = 0,
+                MatrixTotal = 0,
+                SmsTotal = 0,
+                MatrixFailed = Array.Empty<string>(),
+                SmsFailed = Array.Empty<string>()
+            };
         }
 
         var nextcloudMessage = await _ncTalk.SendMessageAsync(message);
@@ -33,6 +42,15 @@ public class MessageService
         var matrixCount = 0;
         var smsCount = 0;
 
+        var matrixFailed = new List<string>();
+        var smsFailed = new List<string>();
+
+        // Matrix total: attempt for every user
+        var matrixTotal = users.Count;
+
+        // SMS total: only users with SMS enabled and phone number
+        var smsTotal = users.Count(u => u.SmsEnabled && !string.IsNullOrEmpty(u.PhoneNumber));
+
         foreach (var user in users)
         {
             var matrixId = $"@{user.Username}:{_matrix.ServerName}";
@@ -40,10 +58,11 @@ public class MessageService
             {
                 var matrixOk = await _matrix.SendPrivateMessageAsync(matrixId, message);
                 if (matrixOk) matrixCount++;
+                else matrixFailed.Add(matrixId);
             }
             catch
             {
-                // ignore individual failures
+                matrixFailed.Add(matrixId);
             }
 
             if (user.SmsEnabled && !string.IsNullOrEmpty(user.PhoneNumber))
@@ -52,10 +71,11 @@ public class MessageService
                 {
                     var smsOk = await _sms.SendSmsAsync(user.PhoneNumber, message);
                     if (smsOk) smsCount++;
+                    else smsFailed.Add(user.PhoneNumber!);
                 }
                 catch
                 {
-                    // ignore
+                    smsFailed.Add(user.PhoneNumber!);
                 }
             }
         }
@@ -64,7 +84,11 @@ public class MessageService
         {
             NextcloudSuccess = nextcloudMessage,
             MatrixSent = matrixCount,
-            SmsSent = smsCount
+            SmsSent = smsCount,
+            MatrixTotal = matrixTotal,
+            SmsTotal = smsTotal,
+            MatrixFailed = matrixFailed.ToArray(),
+            SmsFailed = smsFailed.ToArray()
         };
     }
 }
