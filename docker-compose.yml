@@ -13,19 +13,14 @@ services:
       Matrix__ServerName: ${MATRIX__SERVER_NAME}
       Matrix__BotToken: ${MATRIX__BOT_TOKEN}
       Matrix__BotUserId: ${MATRIX__BOT_USER_ID}
-      SMS__Gateway: ${SMS__Gateway}
-      SMS__Username: ${SMS__Username}
-      SMS__Password: ${SMS__Password}
-      NextcloudTalk__BaseUrl: ${NextcloudTalk__BaseUrl}
-      NextcloudTalk__BotSecret: ${NextcloudTalk__BotSecret}
-      NextcloudTalk__DefaultRoomToken: ${NextcloudTalk__DefaultRoomToken}
+      NEXTCLOUD_BASE_URL: ${NEXTCLOUD_BASE_URL}
     ports:
       - "8080:8080"
     dns:
       - 1.1.1.1
     restart: unless-stopped
     networks:
-      - jugend
+      - traefik
 
   miniweb:
     build:
@@ -49,8 +44,8 @@ services:
     depends_on:
       - botapi
     networks:
-      - jugend
+      - traefik
 
 networks:
-  jugend:
+  traefik:
     external: true
