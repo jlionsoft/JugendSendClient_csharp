@@ -13,7 +13,14 @@ services:
       Matrix__ServerName: ${MATRIX__SERVER_NAME}
       Matrix__BotToken: ${MATRIX__BOT_TOKEN}
       Matrix__BotUserId: ${MATRIX__BOT_USER_ID}
-      NEXTCLOUD_BASE_URL: ${NEXTCLOUD_BASE_URL}
+      SMS__Gateway: ${SMS__Gateway}
+      SMS__Username: ${SMS__Username}
+      SMS__Password: ${SMS__Password}
+      NextcloudTalk__BaseUrl: ${NextcloudTalk__BaseUrl}
+      NextcloudTalk__BotSecret: ${NextcloudTalk__BotSecret}
+      NextcloudTalk__DefaultRoomToken: ${NextcloudTalk__DefaultRoomToken}
+      BOT_SECRET: ${NextcloudTalk__BotSecret}
+      NEXTCLOUD_BASE_URL: ${NextcloudTalk__BaseUrl}
     ports:
       - "8080:8080"
     dns:
