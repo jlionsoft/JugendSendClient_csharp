@@ -34,6 +34,7 @@
     private bool IsSending = false;
     private bool SendSuccess = false;
     private bool SendError = false;
+    private string ResultMessage = "";
 
     // Konfigurationswerte aus appsettings (siehe Hinweis unten)
     private string ApiBaseUrl = "";
@@ -72,12 +73,13 @@
             if (response.IsSuccessStatusCode)
             {
                 SendSuccess = true;
+                Message = "";
             }
             else
             {
                 SendError = true;
             }
-            Message = response.Content.ReadAsStringAsync().Result;
+            ResultMessage = response.Content.ReadAsStringAsync().Result;
 
         }
         catch
