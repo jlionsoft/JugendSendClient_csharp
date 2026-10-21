@@ -27,7 +27,7 @@ services:
       - 1.1.1.1
     restart: unless-stopped
     networks:
-      - traefik
+      - jugend
 
   miniweb:
     build:
@@ -50,9 +50,14 @@ services:
     restart: unless-stopped
     depends_on:
       - botapi
+    volumes:
+      - dpk:/root/.aspnet/DataProtection-Keys
     networks:
-      - traefik
+      - jugend
+
+volumes:
+  dpk:
 
 networks:
-  traefik:
+  jugend:
     external: true
