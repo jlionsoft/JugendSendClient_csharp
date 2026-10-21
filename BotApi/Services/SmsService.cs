@@ -4,11 +4,13 @@
     {
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
+        private readonly ILogger<SmsService> _logger;
 
-        public SmsService(IConfiguration config, HttpClient httpClient)
+        public SmsService(IConfiguration config, HttpClient httpClient, ILogger<SmsService> logger)
         {
             _config = config;
             _httpClient = httpClient;
+            _logger = logger;
         }
 
         /// <summary>
@@ -47,7 +49,7 @@
             _config["SMS:Password"]
             ?? throw new InvalidOperationException("SMS password is not configured");
 
-        public async Task<bool> SendSmsAsync(string phoneNumber, string message)
+        public async Task<bool> SendSmsAsyncOld(string phoneNumber, string message)
         {
             try
             {
@@ -95,5 +97,69 @@
                 return false;
             }
         }
+
+
+        public async Task<bool> SendSmsAsync(
+            string phoneNumber,
+            string message)
+        {
+            try
+            {
+                var credentials = Convert.ToBase64String(
+                    System.Text.Encoding.UTF8.GetBytes(
+                        $"{Username}:{Password}"));
+
+                using var request = new HttpRequestMessage(
+                    HttpMethod.Post,
+                    $"{Gateway.TrimEnd('/')}/rest/tool/sms/send");
+
+                request.Headers.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue(
+                        "Basic", credentials);
+
+                var data = new Dictionary<string, string>
+                {
+                    ["port"] = "lte1",
+                    ["phone-number"] = phoneNumber,
+                    ["message"] = message
+                };
+
+                request.Content = new StringContent(
+                    System.Text.Json.JsonSerializer.Serialize(data),
+                    System.Text.Encoding.UTF8,
+                    "application/json");
+
+                using var response = await _httpClient.SendAsync(request);
+                var responseBody =
+                    await response.Content.ReadAsStringAsync();
+
+                _logger.LogInformation(
+                    "SMS-Gateway: HTTP {StatusCode}, Ziel {PhoneNumber}, Antwort: {Body}",
+                    (int)response.StatusCode,
+                    phoneNumber,
+                    responseBody);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError(
+                        "SMS-Versand fehlgeschlagen: HTTP {StatusCode}",
+                        (int)response.StatusCode);
+
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex,
+                    "Fehler beim SMS-Versand an {PhoneNumber}",
+                    phoneNumber);
+
+                return false;
+            }
+        }
+
     }
 }
