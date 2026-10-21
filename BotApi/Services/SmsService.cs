@@ -49,57 +49,72 @@
             _config["SMS:Password"]
             ?? throw new InvalidOperationException("SMS password is not configured");
 
-        public async Task<bool> SendSmsAsyncOld(string phoneNumber, string message)
+
+        public async Task<bool> SendSmsAsync(string phoneNumber, string message)
         {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                _logger.LogWarning("SMS-Nachricht ist leer.");
+                return false;
+            }
+
+            List<string> parts;
+
             try
             {
-                var credentials = Convert.ToBase64String(
-                    System.Text.Encoding.UTF8.GetBytes($"{Username}:{Password}")
-                );
+                parts = SplitSmsMessage(message);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogWarning(
+                    "SMS an {PhoneNumber} nicht versendet: {Reason}",
+                    phoneNumber,
+                    ex.Message);
 
-                using var request = new HttpRequestMessage(
-                    HttpMethod.Post,
-                    $"{Gateway.TrimEnd('/')}/rest/tool/sms/send"
-                );
+                return false;
+            }
 
-                request.Headers.Authorization =
-                    new System.Net.Http.Headers.AuthenticationHeaderValue(
-                        "Basic",
-                        credentials
-                    );
+            _logger.LogInformation(
+                "SMS an {PhoneNumber}: Versand in {PartCount} Teil(en).",
+                phoneNumber,
+                parts.Count);
 
-                var data = new Dictionary<string, string>
+            for (int i = 0; i < parts.Count; i++)
+            {
+                string part = $"[{i + 1}] {parts[i]}";
+
+                bool success = await SendSingleSmsAsync(
+                    phoneNumber,
+                    part);
+
+                if (!success)
                 {
-                    ["port"] = "lte1",
-                    ["phone-number"] = phoneNumber,
-                    ["message"] = message
-                };
+                    _logger.LogError(
+                        "SMS an {PhoneNumber}: Teil {PartNumber}/{PartCount} fehlgeschlagen. Versand abgebrochen.",
+                        phoneNumber,
+                        i + 1,
+                        parts.Count);
 
-                request.Content = new StringContent(
-                    System.Text.Json.JsonSerializer.Serialize(data),
-                    System.Text.Encoding.UTF8,
-                    "application/json"
-                );
-
-                using var response = await _httpClient.SendAsync(request);
-                var responseBody = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    _ = responseBody; // keep for debugging if needed
                     return false;
                 }
 
-                return true;
+                _logger.LogInformation(
+                    "SMS an {PhoneNumber}: Teil {PartNumber}/{PartCount} vom Gateway angenommen.",
+                    phoneNumber,
+                    i + 1,
+                    parts.Count);
+
+                // Modem zwischen zwei SMS kurz entlasten.
+                if (i < parts.Count - 1)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                }
             }
-            catch (Exception)
-            {
-                return false;
-            }
+
+            return true;
         }
 
-
-        public async Task<bool> SendSmsAsync(
+        private async Task<bool> SendSingleSmsAsync(
             string phoneNumber,
             string message)
         {
@@ -115,7 +130,8 @@
 
                 request.Headers.Authorization =
                     new System.Net.Http.Headers.AuthenticationHeaderValue(
-                        "Basic", credentials);
+                        "Basic",
+                        credentials);
 
                 var data = new Dictionary<string, string>
                 {
@@ -130,20 +146,15 @@
                     "application/json");
 
                 using var response = await _httpClient.SendAsync(request);
-                var responseBody =
-                    await response.Content.ReadAsStringAsync();
-
-                _logger.LogInformation(
-                    "SMS-Gateway: HTTP {StatusCode}, Ziel {PhoneNumber}, Antwort: {Body}",
-                    (int)response.StatusCode,
-                    phoneNumber,
-                    responseBody);
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    _logger.LogError(
-                        "SMS-Versand fehlgeschlagen: HTTP {StatusCode}",
-                        (int)response.StatusCode);
+                    var body = await response.Content.ReadAsStringAsync();
+
+                    _logger.LogWarning(
+                        "SMS-Gateway: HTTP {StatusCode}. Antwort: {Body}",
+                        (int)response.StatusCode,
+                        body);
 
                     return false;
                 }
@@ -152,14 +163,101 @@
             }
             catch (Exception ex)
             {
-                _logger.LogError(
-                    ex,
-                    "Fehler beim SMS-Versand an {PhoneNumber}",
-                    phoneNumber);
-
+                _logger.LogError(ex, "Fehler beim SMS-Gateway-Aufruf.");
                 return false;
             }
         }
 
+        private static List<string> SplitSmsMessage(string message)
+        {
+            const int maxSlots = 150;
+
+            const string basic =
+                "@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ !\"#¤%&'()*+,-./" +
+                "0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿" +
+                "abcdefghijklmnopqrstuvwxyzäöñüà";
+
+            const string extended = "^{}\\[~]|€";
+
+            foreach (char c in message)
+            {
+                if (basic.Contains(c) || extended.Contains(c))
+                    continue;
+
+                throw new ArgumentException(
+                    $"Nicht unterstütztes GSM-7-Zeichen: U+{(int)c:X4} ('{c}').");
+            }
+
+            int Slots(string value)
+            {
+                int count = 0;
+
+                foreach (char c in value)
+                    count += extended.Contains(c) ? 2 : 1;
+
+                return count;
+            }
+
+            var result = new List<string>();
+            int start = 0;
+
+            while (start < message.Length)
+            {
+                int end = start;
+                int lastWhitespace = -1;
+                int slots = 0;
+
+                while (end < message.Length)
+                {
+                    int charSlots = Slots(message[end].ToString());
+
+                    if (slots + charSlots > maxSlots)
+                        break;
+
+                    slots += charSlots;
+
+                    if (char.IsWhiteSpace(message[end]))
+                        lastWhitespace = end;
+
+                    end++;
+                }
+
+                if (end == message.Length)
+                {
+                    result.Add(message[start..end].Trim());
+                    break;
+                }
+
+                if (end == start)
+                {
+                    throw new ArgumentException(
+                        "Ein Zeichen überschreitet die zulässige Nachrichtenlänge.");
+                }
+
+                // Wenn möglich an einer Wortgrenze trennen.
+                int split = lastWhitespace > start
+                    ? lastWhitespace
+                    : end;
+
+                string part = message[start..split].Trim();
+
+                if (part.Length == 0)
+                {
+                    start = split + 1;
+                    continue;
+                }
+
+                result.Add(part);
+
+                start = split;
+                while (start < message.Length &&
+                       char.IsWhiteSpace(message[start]))
+                {
+                    start++;
+                }
+            }
+
+            return result;
+        }
     }
 }
