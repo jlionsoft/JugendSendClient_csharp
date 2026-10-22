@@ -11,6 +11,14 @@
 
 <div class="card p-3 mt-3">
     <h5>Nachricht eingeben</h5>
+@{
+    int zeichenProSms = Message.Length <= 160 ? 160 : 153;
+    int anzahlSms = (int)Math.Ceiling((double)Message.Length / zeichenProSms);
+    // Sonderfall für komplett leere Nachrichten abfangen
+    if (anzahlSms == 0) anzahlSms = 1; 
+}
+
+<p>@Message.Length Zeichen verwendet. Es werden voraussichtlich @anzahlSms SMS-Nachrichten pro Empfänger verschickt.</p>
     <textarea class="form-control" rows="5"
               placeholder="Deine Nachricht..."
               @bind="Message"></textarea>
