@@ -11,6 +11,15 @@
 
 <div class="card p-3 mt-3">
     <h5>Nachricht eingeben</h5>
+
+
+
+
+    <textarea class="form-control" rows="5"
+              placeholder="Deine Nachricht..."
+              @bind="Message"
+              @bind:event="oninput"></textarea>
+
 @{
     int zeichenAnzahl = Message?.Length ?? 0;
     int zeichenProSms = zeichenAnzahl <= 160 ? 160 : 153;
@@ -23,10 +32,6 @@
     @zeichenAnzahl Zeichen verwendet.
     Es werden voraussichtlich @anzahlSms SMS-Nachrichten pro Empfänger verschickt.
 </p>
-
-    <textarea class="form-control" rows="5"
-              placeholder="Deine Nachricht..."
-              @bind="Message"></textarea>
     <button class="btn btn-success mt-3"
             @onclick="SendMessage"
             disabled="@IsSending">
