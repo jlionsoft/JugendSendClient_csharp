@@ -81,7 +81,9 @@
 
             for (int i = 0; i < parts.Count; i++)
             {
-                string part = $"[{i + 1}] {parts[i]}";
+                string part = parts.Count > 1
+                    ? $"[{i + 1}] {parts[i]}"
+                    : parts[i];
 
                 bool success = await SendSingleSmsAsync(
                     phoneNumber,
